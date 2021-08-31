@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0120)https://www.fixturelist.com/createlistshow/b01f979f-e3fe-4343-b7e5-47cbda022fa1-m44Nsk7Is5OwbfIGjg5QSibSH6Jx2f317le7r75Q -->
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="description" content="Containing online fixture management tools, a fixture list generator and easy to use league management system with online results, fixtures and tables." />
+        <meta
+            name="Keywords"
+            content="fixture list,football,league management,fixture generator,sports league,rugby,cricket,leagues,tournament,competition,fixtures,lists,sport,UK sports,tournament management,schedule software,league software,soccer,season,united kingdom,england,scotland,football,dart,free,fixture generator,generate league fixtures,schedules,player,team,create a fixture lists,creator,single,home,away,amateur,professional,cup,club,association,easy,league management tool,simple,table,online,schedule generator"
+        />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content="hl5WOoyRJ4EBNSg9lMQ6FBKjm3Dm9WpGf3bWoM4g" />
+
+        <title>Disney Villainous - The Ultimate Battle for Evil</title>
+
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">	
+        <link href="./base.css" rel="stylesheet" />
+        <link href="./villains.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="top">
+			<div id="header" class="container header">
+				<span class="disney">Disney Villainous</span> - The Ultimate Battle for <span class="evil">Evil</span>
+			</div>
+			<div class="rounds-wrapper">
+				<select id="rounds" class="rounds"></select>
+			</div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 hidden-sm hidden-xs"></div>
+                <div id="fixture-container" class="col-lg-8 col-md-8">
+
+                    <!-- FIXTURE GOES HERE -->
+
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="animations.js"></script>
+    <script src="fixture.js"></script>
+    <script src="villains_data.js"></script>
+    <script src="rounds_data.js"></script>
+	<script>
+        function onLoad(villainsData, roundsData) {
+            const villains = loadVillains(villainsData);
+
+            // const fixture = getFixture(villains);
+            const fixture = loadFixture(villains, roundsData);
+            // console.log(printFixture(fixture));
+            drawFixture(fixture);
+
+            // Calculate header size once
+            animateHeader();
+
+            // Load rounds
+            const currentRound = fixture.current;
+            const rounds = document.getElementById("rounds");
+            for (let i = 1; i <= fixture.rounds.length; i++) {
+                const option = document.createElement("option");
+                option.text = "Round " + i;
+                option.value = `${i}`;
+                if (i < currentRound) {
+                    option.classList.add("complete");
+                } else if (i === currentRound) {
+                    option.classList.add("current");
+                }
+                rounds.add(option);
+            }
+            rounds.onchange = (evt) => {
+                scrollToRound(evt.target.value, true);
+            };
+
+            // Go to current round
+            rounds.value = currentRound;
+            rounds.dispatchEvent(new Event("change"));
+        }
+
+		window.onscroll = animateHeader;
+		window.onload = () => {
+			// Load fixture
+            // Villains and Rounds data loaded from separate JS files
+            onLoad(villainsData, roundsData);
+
+            // fetch("villains.json")
+            //     .then((response) => response.json())
+            //     .then(villainsData => {
+            //         fetch("rounds_data.json")
+            //             .then(response => response.json())
+            //             .then(roundsData => {
+            //                 onLoad(villainsData, roundsData);
+            //             });
+            //     });
+		};
+	</script>
+</html>

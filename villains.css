@@ -1,0 +1,133 @@
+.top {
+    top: 0;
+    width: 100%;
+    background-color: #3d3769;
+    border-bottom: 3px solid #6e63bc;
+    position: fixed;
+    z-index: 999999;
+}
+
+.top ~ * {
+    margin-top: 10rem;
+}
+
+.header {
+    width: 100%;
+    padding: 2.5rem;
+    font-size: 2.6rem;
+    line-height: 3rem;
+    text-align: center;
+    color: white;
+}
+
+.header.shrink {
+    padding: 0.8rem;
+    line-height: 2.2rem;
+    transform: scale(0.7);
+    transition: all .3s ease;
+}
+
+.header.grow {
+    transition: all .3s ease;
+}
+
+.disney {
+    font-size: 3rem;
+}
+
+.evil {
+    font-size: 4rem;
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'Hachi Maru Pop', cursive;
+    color: rgb(230, 30, 50);
+}
+
+.rounds-wrapper {
+    position: fixed;
+    right: 10px;
+    margin-top: 1px;
+}
+
+.rounds {
+    padding: .8rem;
+    color: #6e63bc;
+    font-weight: bold;
+    border: 3px solid #6e63bc;
+}
+
+.rounds option {
+    color: #636b6f;
+}
+
+.rounds option.complete {
+    color: #DDDDDD;
+}
+
+.rounds option.current {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #6e63bc;
+}
+
+.villain {
+    padding: 0;
+}
+
+.villain-img-wrapper {
+	display: inline-block;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.villain-img {
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 1rem;
+}
+
+.villain-won .villain-img-wrapper {
+    padding: 2px;
+    background: #524a8b;
+    box-shadow:
+		0 0 12px 6px #847acf,
+		0 0 2px 1px #524a8b;
+}
+
+.villain-won .villain-img {
+    box-shadow: 0 0 1px 0 #8142bf;
+}
+
+.villain-lost.villain-left {
+	padding-right: 1rem;
+}
+
+.villain-lost.villain-right {
+	padding-left: 1rem;
+}
+
+.villain-lost:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 12px;
+    width: 13rem;
+    height: 13rem;
+    box-shadow: inset 0 0 2rem 1rem rgb(72, 72, 72);
+    border-radius: 1rem;
+    z-index: 1;
+}
+.villain-left.villain-lost:before {
+    right: 1rem;
+}
+.villain-right.villain-lost:before {
+    left: 1rem;
+}
+
+.villain-lost img.villain-img {
+    width: 13rem;
+    height: 13rem;
+    opacity: 0.75;
+}
