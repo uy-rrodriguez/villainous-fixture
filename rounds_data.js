@@ -18,7 +18,7 @@
  */
 
 const roundsData = {
-  "current": 1,
+  "current": 2,
   "rounds": [
     [
       {
