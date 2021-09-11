@@ -71,7 +71,7 @@ const roundsData = {
       {
         "1": "Cruella",
         "2": "Lady Tremaine",
-        "winner": "0"
+        "winner": "2"
       },
       {
         "1": "Horned King",
