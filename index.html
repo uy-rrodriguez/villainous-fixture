@@ -16,17 +16,11 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
-
 <!DOCTYPE html>
-<!-- saved from url=(0120)https://www.fixturelist.com/createlistshow/b01f979f-e3fe-4343-b7e5-47cbda022fa1-m44Nsk7Is5OwbfIGjg5QSibSH6Jx2f317le7r75Q -->
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="description" content="Containing online fixture management tools, a fixture list generator and easy to use league management system with online results, fixtures and tables." />
-        <meta
-            name="Keywords"
-            content="fixture list,football,league management,fixture generator,sports league,rugby,cricket,leagues,tournament,competition,fixtures,lists,sport,UK sports,tournament management,schedule software,league software,soccer,season,united kingdom,england,scotland,football,dart,free,fixture generator,generate league fixtures,schedules,player,team,create a fixture lists,creator,single,home,away,amateur,professional,cup,club,association,easy,league management tool,simple,table,online,schedule generator"
-        />
+        <meta name="description" content="Simple championship-like fixture of all-vs-all (C)Disney Villainous board game characters." />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,19 +28,20 @@
 
         <title>Disney Villainous - The Ultimate Battle for Evil</title>
 
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">	
-        <link href="./base.css" rel="stylesheet" />
-        <link href="./villains.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+
+        <link href="./base.css?v={{ site.github.build_revision }}" rel="stylesheet" />
+        <link href="./villains.css?v={{ site.github.build_revision }}" rel="stylesheet" />
     </head>
     <body>
         <div class="top">
-			<div id="header" class="container header">
-				<span class="disney">Disney Villainous</span> - The Ultimate Battle for <span class="evil">Evil</span>
-			</div>
-			<div class="rounds-wrapper">
-				<select id="rounds" class="rounds"></select>
-			</div>
+        <div id="header" class="container header">
+            <span class="disney">Disney Villainous</span> - The Ultimate Battle for <span class="evil">Evil</span>
+        </div>
+        <div class="rounds-wrapper">
+            <select id="rounds" class="rounds"></select>
+        </div>
         </div>
         <div class="container">
             <div class="row">
@@ -60,11 +55,11 @@
         </div>
     </body>
 
-    <script src="animations.js"></script>
-    <script src="fixture.js"></script>
-    <script src="villains_data.js"></script>
-    <script src="rounds_data.js"></script>
-	<script>
+    <script src="animations.js?v={{ site.github.build_revision }}"></script>
+    <script src="fixture.js?v={{ site.github.build_revision }}"></script>
+    <script src="villains_data.js?v={{ site.github.build_revision }}"></script>
+    <script src="rounds_data.js?v={{ site.github.build_revision }}"></script>
+    <script>
         function onLoad(villainsData, roundsData) {
             const villains = loadVillains(villainsData);
 
@@ -99,9 +94,9 @@
             rounds.dispatchEvent(new Event("change"));
         }
 
-		window.onscroll = animateHeader;
-		window.onload = () => {
-			// Load fixture
+        window.onscroll = animateHeader;
+        window.onload = () => {
+            // Load fixture
             // Villains and Rounds data loaded from separate JS files
             onLoad(villainsData, roundsData);
 
@@ -114,6 +109,6 @@
             //                 onLoad(villainsData, roundsData);
             //             });
             //     });
-		};
-	</script>
+        };
+    </script>
 </html>
