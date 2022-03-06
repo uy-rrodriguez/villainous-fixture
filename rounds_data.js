@@ -81,7 +81,7 @@ const roundsData = {
       {
         "1": "Mother Gothel",
         "2": "Captain Hook",
-        "winner": "0"
+        "winner": "1"
       },
       {
         "1": "Prince John",
