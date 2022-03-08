@@ -116,7 +116,7 @@ body {
 }
 
 .panel-default > .panel-heading {
-    color: #white;
+    color: white;
     background-color: #5B52A1;
     border-bottom: 2px solid white;
 }
@@ -130,6 +130,7 @@ body {
  * VILLAIN ITEM
  */
 .villain-vs {
+    justify-content: center;
     font-size: 1.2rem;
 }
 
