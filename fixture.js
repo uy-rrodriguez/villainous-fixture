@@ -347,25 +347,19 @@ function drawFixture(fixture) {
 
             row.innerHTML =
                 `<div class="villain villain-left ${resultClass1} col-xs-5">
-					<div class="text-right">
-						<div class="villain-img-wrapper">
-							<img class="villain-img" src="img/${pair.item1.image}" />
-						</div>
-					</div>
+                     <div class="text-right">
+                         <div class="villain-img-wrapper">
+                             <img class="villain-img" src="img/${pair.item1.image}" />
+                         </div>
+                     </div>
                 </div>
-                <div class="col-xs-2">
-                    <div class="text-center">
-                        <small>
-                            vs
-                        </small>
-                    </div>
-                </div>
+                <div class="col-xs-2 text-center villain-vs">vs</div>
                 <div class="villain villain-right ${resultClass2} col-xs-5">
-					<div class="text-left">
-						<div class="villain-img-wrapper">
-							<img class="villain-img" src="img/${pair.item2.image}" />
-						</div>
-					</div>
+                    <div class="text-left">
+                        <div class="villain-img-wrapper">
+                            <img class="villain-img" src="img/${pair.item2.image}" />
+                        </div>
+                    </div>
                 </div>`;
 
             if (pair_idx < round_pairs.length - 1) {
