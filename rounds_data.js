@@ -91,7 +91,7 @@ const roundsData = {
       {
         "1": "Dr. Facilier",
         "2": "Ratigan",
-        "winner": "0"
+        "winner": "1"
       },
       {
         "1": "Jafar",
