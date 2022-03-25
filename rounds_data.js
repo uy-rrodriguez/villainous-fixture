@@ -101,7 +101,7 @@ const roundsData = {
       {
         "1": "Maleficent",
         "2": "Ursula",
-        "winner": "0"
+        "winner": "1"
       },
       {
         "1": "Evil Queen",
