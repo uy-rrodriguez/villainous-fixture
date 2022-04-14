@@ -18,7 +18,7 @@
  */
 
 const roundsData = {
-  "current": 2,
+  "current": 3,
   "rounds": [
     [
       {
@@ -106,7 +106,7 @@ const roundsData = {
       {
         "1": "Evil Queen",
         "2": "Pete",
-        "winner": "0"
+        "winner": "1"
       },
       {
         "1": "Hades",
