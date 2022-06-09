@@ -252,6 +252,7 @@ function setResultsIntoFixture(fixture, results) {
             i++;
         }
     }));
+    console.debug(fixture);
 }
 
 /**
@@ -300,10 +301,10 @@ function resultsToJson(fixture) {
                 pairs.push([pair.item1.name, pair.item2.name, winner]);
             }
         });
-        console.debug(pairs);
 
         // Only generate data for rounds and pairs that have a winner
         if (pairs.length > 0) {
+            console.debug(pairs);
             rounds.push(pairs);
         }
     });
