@@ -260,7 +260,7 @@ function setResultsIntoFixture(fixture, results) {
  * @param {Fixture} fixture
  * @returns {string}
  */
-function printFixture(fixture) {
+function fixtureToJson(fixture) {
     console.debug('printFixture');
     const simplifiedRounds = [];
     fixture.rounds.forEach(round => {
@@ -286,7 +286,7 @@ function printFixture(fixture) {
  * @param {Fixture} fixture
  * @returns {string}
  */
-function printResults(fixture) {
+function resultsToJson(fixture) {
     console.debug('printResults');
     const rounds = [];
     fixture.rounds.forEach(round => {
