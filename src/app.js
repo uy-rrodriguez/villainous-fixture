@@ -289,9 +289,8 @@ function fixtureToJson(fixture) {
  */
 function resultsToJson(fixture) {
     console.debug('resultsToJson');
-    const rounds = [];
+    const pairs = [];
     fixture.rounds.forEach(round => {
-        const pairs = [];
         round.forEach(pair => {
             const winner =
                 pair.winner === pair.item1 ? 1
@@ -301,14 +300,18 @@ function resultsToJson(fixture) {
                 pairs.push([pair.item1.name, pair.item2.name, winner]);
             }
         });
-
-        // Only generate data for rounds and pairs that have a winner
-        if (pairs.length > 0) {
-            console.debug(pairs);
-            rounds.push(pairs);
-        }
     });
-    return JSON.stringify(rounds, null, 2);
+
+    // JSONify manually, to avoid line breaks inside a result array
+    if (pairs.length > 0) {
+        let jsonified = '[';
+        pairs.forEach(pair => jsonified += `\n  ${pair},`);
+        jsonified = jsonified.substring(0, jsonified-2);  // Remove last ","
+        jsonified += '\n]';
+    }
+    else {
+        return '[]';
+    }
 }
 
 /**
