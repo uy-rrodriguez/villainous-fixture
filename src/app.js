@@ -412,7 +412,7 @@ function drawFixture(fixture) {
                 `<div class="villain villain-left ${resultClass1} col-xs-5">
                      <div class="text-right">
                          <div class="villain-img-wrapper">
-                             <img class="villain-img" src="img/${pair.item1.image}" />
+                             <img class="villain-img" src="assets/img/${pair.item1.image}" />
                          </div>
                      </div>
                 </div>
@@ -420,7 +420,7 @@ function drawFixture(fixture) {
                 <div class="villain villain-right ${resultClass2} col-xs-5">
                     <div class="text-left">
                         <div class="villain-img-wrapper">
-                            <img class="villain-img" src="img/${pair.item2.image}" />
+                            <img class="villain-img" src="assets/img/${pair.item2.image}" />
                         </div>
                     </div>
                 </div>`;
