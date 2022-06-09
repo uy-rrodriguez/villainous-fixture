@@ -363,7 +363,7 @@ function loadFixture(villains, fixtureData, results) {
  *
  * @param {Fixture} fixture
  */
-function drawFixture(fixture) {
+function drawFixtureHtml(fixture) {
     const container = document.createElement("div");
     const hr = document.createElement("hr");
     hr.classList.add("thin-hr");
@@ -446,7 +446,7 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const fixture = loadFixture(villains, roundsData, resultsData);
     console.log(resultsToJson(fixture));
     // B) or Generate new fixture from updated villains data
-    //const fixture = getFixture(villains);
+    //const fixture = generateFixture(villains);
     //console.log(fixtureToJson(fixture));
     //setResultsIntoFixture(fixture, resultsData);
 
