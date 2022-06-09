@@ -433,3 +433,48 @@ function drawFixture(fixture) {
 
     document.getElementById("fixture-container").innerHTML = container.innerHTML;
 }
+
+/**
+ * Logic to be executed when the HTML page loads.
+ * 
+ * @param {Fixture} fixture
+ */
+function onPageLoad(villainsData, roundsData, resultsData) {
+    const villains = loadVillains(villainsData);
+
+    // A) Either load fixture from rounds data
+    const fixture = loadFixture(villains, roundsData, resultsData);
+    console.log(resultsToJson(fixture));
+    // B) or Generate new fixture from updated villains data
+    //const fixture = getFixture(villains);
+    //console.log(fixtureToJson(fixture));
+    //setResultsIntoFixture(fixture, resultsData);
+
+    // Draw fixture as HTML
+    drawFixtureHtml(fixture);
+
+    // Calculate header size once
+    animateHeader();
+
+    // Load rounds
+    const currentRound = fixture.current;
+    const rounds = document.getElementById("rounds");
+    for (let i = 1; i <= fixture.rounds.length; i++) {
+        const option = document.createElement("option");
+        option.text = "Round " + i;
+        option.value = `${i}`;
+        if (i < currentRound) {
+            option.classList.add("complete");
+        } else if (i === currentRound) {
+            option.classList.add("current");
+        }
+        rounds.add(option);
+    }
+    rounds.onchange = (evt) => {
+        scrollToRound(evt.target.value, true);
+    };
+
+    // Go to current round
+    rounds.value = currentRound;
+    rounds.dispatchEvent(new Event("change"));
+}
