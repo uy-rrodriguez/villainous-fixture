@@ -233,16 +233,19 @@ function generateFixture(villains) {
  * @param {str[][]} results: array of elements like ['villain1', 'villain2', '1']
  */
 function setResultsIntoFixture(fixture, results) {
+    console.debug('setResultsIntoFixture');
     // Copy results and sort by villain name 1 and then villain name 2
     const resultsCopy = results.slice();
-    console.debug('setResultsIntoFixture');
     console.debug(resultsCopy);
     fixture.rounds.forEach((round_pairs) => round_pairs.forEach((pair) => {
         let result = null;
         let i = 0;
         while (result === null && i < resultsCopy.length) {
-            if (pair.item1 === resultsCopy[i][0] && pair.item2 === resultsCopy[i][1]) {
+            if (pair.item1.name === resultsCopy[i][0]
+                    && pair.item2.name === resultsCopy[i][1]) {
                 result = resultsCopy.splice(i, 1)[0];
+                console.debug(`Found result: ${result}`);
+
                 // Set winner Villain depending on the stored value
                 pair.winner =
                     result[2] === 1 ? pair.item1
