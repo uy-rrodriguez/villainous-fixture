@@ -221,9 +221,37 @@ function getRoundsBerger(villains) {
  * @param {Villain[]} villains
  * @returns {Fixture}
  */
-function getFixture(villains) {
+function generateFixture(villains) {
     const rounds = getRoundsBerger(villains);
     return new Fixture(1, rounds);
+}
+
+/**
+ * Sets the results into a Fixture, from the given Results list.
+ *
+ * @param {Fixture} fixture
+ * @param {str[][]} results: array of elements like ['villain1', 'villain2', '1']
+ */
+function setResultsIntoFixture(fixture, results) {
+    // Copy results and sort by villain name 1 and then villain name 2
+    const resultsCopy = results.slice();
+    console.debug('setResultsIntoFixture');
+    console.debug(resultsCopy);
+    fixture.rounds.forEach((round_pairs) => round_pairs.forEach((pair) => {
+        let result = null;
+        let i = 0;
+        while (result === null && i < resultsCopy.length) {
+            if (pair.item1 === resultsCopy[i][0] && pair.item2 === resultsCopy[i][1]) {
+                result = resultsCopy.splice(i, 1)[0];
+                // Set winner Villain depending on the stored value
+                pair.winner =
+                    result[2] === 1 ? pair.item1
+                    : result[2] === 2 ? pair.item2
+                    : null;
+            }
+            i++;
+        }
+    }));
 }
 
 /**
@@ -239,11 +267,9 @@ function printFixture(fixture) {
         const simpleRound = [];
         round.forEach(pair => {
             console.debug(pair);
-            const winner = (pair.winner === pair.item1 ? 1 : (pair.winner === pair.item2 ? 2 : 0));
             simpleRound.push({
                 1: pair.item1.name,
                 2: pair.item2.name,
-                winner: `${winner}`,
             });
         });
         simplifiedRounds.push(simpleRound);
@@ -252,6 +278,35 @@ function printFixture(fixture) {
         current: fixture.current,
         rounds: simplifiedRounds,
     }, null, 2);
+}
+
+/**
+ * Generates a JSON string from the fixture rounds with winners data.
+ *
+ * @param {Fixture} fixture
+ * @returns {string}
+ */
+function printResults(fixture) {
+    console.debug('printResults');
+    const rounds = [];
+    fixture.rounds.forEach(round => {
+        const pairs = [];
+        round.forEach(pair => {
+            const winner =
+                pair.winner === pair.item1 ? 1
+                : pair.winner === pair.item2 ? 2
+                : null;
+            if (winner) {
+                pairs.push([pair.item1.name, pair.item2.name, winner]);
+            }
+        });
+
+        // Only generate data for rounds and pairs that have a winner
+        if (pairs.length > 0) {
+            rounds.push(pairs);
+        }
+    });
+    return JSON.stringify(rounds, null, 2);
 }
 
 /**
@@ -272,28 +327,34 @@ function findVillain(name, villains) {
 
 /**
  * Loads a pre-generated fixture from a JSON object.
+ * Sets winners from the given results array.
  *
  * @param {Villain[]} villains
- * @param {Object} jsonObject
+ * @param {Fixture} fixture
+ * @param {str[][]} results: array of elements like ['villain1', 'villain2', '1']
  * @returns {Fixture}
  */
-function loadFixture(villains, jsonObject) {
-    const fixture = new Fixture(jsonObject.current, []);
-    jsonObject["rounds"].forEach(simpleRound => {
+function loadFixture(villains, fixtureData, results) {
+    const fixture = new Fixture(fixtureData.current, []);
+    fixtureData.rounds.forEach(simpleRound => {
         const roundPairs = [];
         simpleRound.forEach(simplePair => {
             const pair = new Pair(
                 findVillain(simplePair["1"], villains),
                 findVillain(simplePair["2"], villains),
             );
-            switch (simplePair["winner"]) {
-                case "1": pair.winner = pair.item1; break;
-                case "2": pair.winner = pair.item2;
+            // If fixture still has results data, load it
+            if ('winner' in simplePair) {
+                switch (simplePair.winner) {
+                    case "1": pair.winner = pair.item1; break;
+                    case "2": pair.winner = pair.item2;
+                }
             }
             roundPairs.push(pair);
         });
         fixture.rounds.push(roundPairs);
     });
+    setResultsIntoFixture(fixture, results);
     return fixture;
 }
 
