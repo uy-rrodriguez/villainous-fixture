@@ -308,6 +308,7 @@ function resultsToJson(fixture) {
         pairs.forEach(pair => jsonified += `\n  ${pair},`);
         jsonified = jsonified.substring(0, jsonified-2);  // Remove last ","
         jsonified += '\n]';
+        return jsonified;
     }
     else {
         return '[]';
