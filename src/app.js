@@ -242,7 +242,8 @@ function setResultsIntoFixture(fixture, results) {
         let result = null;
         let i = 0;
         while (result === null && i < resultsCopy.length) {
-            if (pair.item1.name in resultsCopy[i] && pair.item2.name in resultsCopy[i]) {
+            if (resultsCopy[i].indexOf(pair.item1.name) >= 0
+                    && resultsCopy[i].indexOf(pair.item2.name) >= 0) {
                 result = resultsCopy.splice(i, 1)[0];
                 console.debug(`Found result: ${result}`);
 
@@ -453,7 +454,7 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);
 
     // A) Either load fixture from rounds data
-    //const fixture = loadFixture(villains, roundsData, resultsData);
+    const fixture = loadFixture(villains, roundsData, resultsData);
     // B) or Generate new fixture from villains data
     const fixture = generateFixture(villains, resultsData);
     console.log(fixtureToJson(fixture));
