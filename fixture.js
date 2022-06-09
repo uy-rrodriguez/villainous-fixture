@@ -149,15 +149,18 @@ function loadVillains(jsonObject) {
  * @see https://en.wikipedia.org/wiki/Round-robin_tournament
  */
 function getRoundsBerger(villains) {
+    console.debug('getRoundsBerger');
     let rows = [];  // Rounds but only with the item ids
     let rounds = [];
     const n = villains.length;
 
     // Add dummy element if number is odd
     if (n % 2 > 0) {
+        console.debug(`Odd number of elements (${n}). Creating dummy.`);
         let dummy = new Villain("dummy", "");
         dummy.isDummy = true;
         villains.push(dummy);
+        n = n+1;
     }
 
     // First round pairs 1<->n, 2<->(n-1), 3<->(n-2), etc.
@@ -166,7 +169,7 @@ function getRoundsBerger(villains) {
         row.push(i);
         row.push(n+1-i);
     }
-    console.log(row);
+    console.debug(`Round 1, row: ${row}`);
     rows.push(row);
 
     // Following n-2 rounds fix item n and calculate the rest from the previous item in the same position.
@@ -194,7 +197,7 @@ function getRoundsBerger(villains) {
         let x0 = row[0];
         row[0] = row[1];
         row[1] = x0;
-        console.log(row);
+        console.debug(`Round ${r+1}, row: ${row}`);
         rows.push(row);
     }
 
@@ -219,10 +222,8 @@ function getRoundsBerger(villains) {
  * @returns {Fixture}
  */
 function getFixture(villains) {
-    //const pairings = getPairings(villains);
-    //const rounds = get_rounds_backtrack(villains, pairings);
     const rounds = getRoundsBerger(villains);
-	return new Fixture(1, rounds);
+    return new Fixture(1, rounds);
 }
 
 /**
@@ -232,11 +233,12 @@ function getFixture(villains) {
  * @returns {string}
  */
 function printFixture(fixture) {
+    console.debug('printFixture');
     const simplifiedRounds = [];
     fixture.rounds.forEach(round => {
         const simpleRound = [];
         round.forEach(pair => {
-            console.log(pair);
+            console.debug(pair);
             const winner = (pair.winner === pair.item1 ? 1 : (pair.winner === pair.item2 ? 2 : 0));
             simpleRound.push({
                 1: pair.item1.name,
