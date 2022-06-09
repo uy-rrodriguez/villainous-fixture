@@ -19,72 +19,8 @@
 
 const villainsData = [
   {
-    "name": "Madame Mim",
-    "img": "mim.jpg"
-  },
-  {
-    "name": "Hades",
-    "img": "hades.jpg"
-  },
-  {
-    "name": "Scar",
-    "img": "scar.jpg"
-  },
-  {
-    "name": "Pete",
-    "img": "pete.jpg"
-  },
-  {
-    "name": "Ursula",
-    "img": "ursula.jpg"
-  },
-  {
-    "name": "Yzma",
-    "img": "yzma.jpg"
-  },
-  {
-    "name": "Ratigan",
-    "img": "ratigan.jpg"
-  },
-  {
-    "name": "Queen of Hearts",
-    "img": "queen_hearts.jpg"
-  },
-  {
     "name": "Captain Hook",
     "img": "hook.jpg"
-  },
-  {
-    "name": "Gaston",
-    "img": "gaston.jpg"
-  },
-  {
-    "name": "Syndrome",
-    "img": "syndrome.jpg"
-  },
-  {
-    "name": "Lotso",
-    "img": "lotso.jpg"
-  },
-  {
-    "name": "Lady Tremaine",
-    "img": "tremaine.jpg"
-  },
-  {
-    "name": "Horned King",
-    "img": "horned_king.jpg"
-  },
-  {
-    "name": "Mother Gothel",
-    "img": "gothel.jpg"
-  },
-  {
-    "name": "Prince John",
-    "img": "prince_john.jpg"
-  },
-  {
-    "name": "Dr. Facilier",
-    "img": "facilier.jpg"
   },
   {
     "name": "Jafar",
@@ -95,11 +31,75 @@ const villainsData = [
     "img": "maleficent.jpg"
   },
   {
+    "name": "Prince John",
+    "img": "prince_john.jpg"
+  },
+  {
+    "name": "Queen of Hearts",
+    "img": "queen_hearts.jpg"
+  },
+  {
+    "name": "Ursula",
+    "img": "ursula.jpg"
+  },
+  {
+    "name": "Dr. Facilier",
+    "img": "facilier.jpg"
+  },
+  {
     "name": "Evil Queen",
     "img": "evil_queen.jpg"
   },
   {
+    "name": "Hades",
+    "img": "hades.jpg"
+  },
+  {
+    "name": "Ratigan",
+    "img": "ratigan.jpg"
+  },
+  {
+    "name": "Scar",
+    "img": "scar.jpg"
+  },
+  {
+    "name": "Yzma",
+    "img": "yzma.jpg"
+  },
+  {
     "name": "Cruella",
     "img": "cruella.jpg"
+  },
+  {
+    "name": "Mother Gothel",
+    "img": "gothel.jpg"
+  },
+  {
+    "name": "Pete",
+    "img": "pete.jpg"
+  },
+  {
+    "name": "Gaston",
+    "img": "gaston.jpg"
+  },
+  {
+    "name": "Horned King",
+    "img": "horned_king.jpg"
+  },
+  {
+    "name": "Lady Tremaine",
+    "img": "tremaine.jpg"
+  },
+  {
+    "name": "Syndrome",
+    "img": "syndrome.jpg"
+  },
+  {
+    "name": "Madame Mim",
+    "img": "mim.jpg"
+  },
+  {
+    "name": "Lotso",
+    "img": "lotso.jpg"
   },
 ];
