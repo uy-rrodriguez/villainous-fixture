@@ -63,6 +63,10 @@ const villainsData = [
     "img": "lotso.jpg"
   },
   {
+    "name": "Madame Mim",
+    "img": "mim.jpg"
+  },
+  {
     "name": "Lady Tremaine",
     "img": "tremaine.jpg"
   },
@@ -97,9 +101,5 @@ const villainsData = [
   {
     "name": "Cruella",
     "img": "cruella.jpg"
-  },
-  {
-    "name": "Madame Mim",
-    "img": "mim.jpg"
   },
 ];
