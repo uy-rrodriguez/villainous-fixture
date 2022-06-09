@@ -28,7 +28,6 @@
 function Villain(name, image) {
     this.name = name;
     this.image = image;
-    this.isDummy = false;
 }
 Villain.prototype.toString = function () {
     return `${this.name}`;
@@ -153,13 +152,12 @@ function getRoundsBerger(villains) {
     let rows = [];  // Rounds but only with the item ids
     let rounds = [];
     let n = villains.length;
+    let dummy = null;
 
     // Add dummy element if number is odd
     if (n % 2 > 0) {
         console.debug(`Odd number of elements (${n}). Creating dummy.`);
-        let dummy = new Villain("dummy", "");
-        dummy.isDummy = true;
-        villains.push(dummy);
+        dummy = n;
         n = n+1;
     }
 
@@ -207,7 +205,11 @@ function getRoundsBerger(villains) {
         for (let i = 0; i < n-1; i+=2) {
             const idx1 = rows[r][i] - 1;
             const idx2 = rows[r][i+1] - 1;
-            pairs.push(new Pair(villains[idx1], villains[idx2]));
+
+            // Ignore pair if it contains the dummy
+            if (idx1 !== dummy && idx2 !== dummy) {
+                pairs.push(new Pair(villains[idx1], villains[idx2]));
+            }
         }
         rounds.push(pairs);
     }
@@ -354,13 +356,6 @@ function loadFixture(villains, fixtureData, results) {
                 findVillain(simplePair["1"], villains),
                 findVillain(simplePair["2"], villains),
             );
-            // If fixture still has results data, load it
-            if ('winner' in simplePair) {
-                switch (simplePair.winner) {
-                    case "1": pair.winner = pair.item1; break;
-                    case "2": pair.winner = pair.item2;
-                }
-            }
             roundPairs.push(pair);
         });
         fixture.rounds.push(roundPairs);
@@ -400,10 +395,6 @@ function drawFixtureHtml(fixture) {
         body.classList.add("panel-body");
 
         round_pairs.forEach((pair, pair_idx) => {
-            // Ignore a pairing with the dummy element (when the number of items is odd)
-            if (pair.item1.isDummy || pair.item2.isDummy)
-                return;
-
             const row = document.createElement("div");
             body.appendChild(row);
             row.classList.add("row", "row-pad-18", "vertical-align");
