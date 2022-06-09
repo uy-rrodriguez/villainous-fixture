@@ -22,10 +22,6 @@ const roundsData = {
   "rounds": [
     [
       {
-        "1": "Madame Mim",
-        "2": "dummy"
-      },
-      {
         "1": "Hades",
         "2": "Cruella"
       },
@@ -67,10 +63,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Lotso"
-      },
       {
         "1": "Lady Tremaine",
         "2": "Syndrome"
@@ -114,10 +106,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Hades",
-        "2": "dummy"
-      },
-      {
         "1": "Scar",
         "2": "Madame Mim"
       },
@@ -159,10 +147,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Lady Tremaine"
-      },
       {
         "1": "Horned King",
         "2": "Lotso"
@@ -206,10 +190,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Scar",
-        "2": "dummy"
-      },
-      {
         "1": "Pete",
         "2": "Hades"
       },
@@ -251,10 +231,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Horned King"
-      },
       {
         "1": "Mother Gothel",
         "2": "Lady Tremaine"
@@ -298,10 +274,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Pete",
-        "2": "dummy"
-      },
-      {
         "1": "Ursula",
         "2": "Scar"
       },
@@ -343,10 +315,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Mother Gothel"
-      },
       {
         "1": "Prince John",
         "2": "Horned King"
@@ -390,10 +358,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Ursula",
-        "2": "dummy"
-      },
-      {
         "1": "Yzma",
         "2": "Pete"
       },
@@ -435,10 +399,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Prince John"
-      },
       {
         "1": "Dr. Facilier",
         "2": "Mother Gothel"
@@ -482,10 +442,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Yzma",
-        "2": "dummy"
-      },
-      {
         "1": "Ratigan",
         "2": "Ursula"
       },
@@ -527,10 +483,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Dr. Facilier"
-      },
       {
         "1": "Jafar",
         "2": "Prince John"
@@ -574,10 +526,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Ratigan",
-        "2": "dummy"
-      },
-      {
         "1": "Queen of Hearts",
         "2": "Yzma"
       },
@@ -619,10 +567,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Jafar"
-      },
       {
         "1": "Maleficent",
         "2": "Dr. Facilier"
@@ -666,10 +610,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Queen of Hearts",
-        "2": "dummy"
-      },
-      {
         "1": "Captain Hook",
         "2": "Ratigan"
       },
@@ -711,10 +651,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Maleficent"
-      },
       {
         "1": "Evil Queen",
         "2": "Jafar"
@@ -758,10 +694,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Captain Hook",
-        "2": "dummy"
-      },
-      {
         "1": "Gaston",
         "2": "Queen of Hearts"
       },
@@ -803,10 +735,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "dummy",
-        "2": "Evil Queen"
-      },
       {
         "1": "Cruella",
         "2": "Maleficent"
@@ -850,10 +778,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Gaston",
-        "2": "dummy"
-      },
-      {
         "1": "Syndrome",
         "2": "Captain Hook"
       },
@@ -896,10 +820,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "dummy",
-        "2": "Cruella"
-      },
-      {
         "1": "Madame Mim",
         "2": "Evil Queen"
       },
@@ -941,10 +861,6 @@ const roundsData = {
       }
     ],
     [
-      {
-        "1": "Syndrome",
-        "2": "dummy"
-      },
       {
         "1": "Lotso",
         "2": "Gaston"
