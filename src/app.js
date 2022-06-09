@@ -221,16 +221,18 @@ function getRoundsBerger(villains) {
  * @param {Villain[]} villains
  * @returns {Fixture}
  */
-function generateFixture(villains) {
+function generateFixture(villains, results) {
     const rounds = getRoundsBerger(villains);
-    return new Fixture(1, rounds);
+    const fixture = new Fixture(1, rounds);
+    setResultsIntoFixture(fixture, results);
+    return fixture;
 }
 
 /**
  * Sets the results into a Fixture, from the given Results list.
  *
  * @param {Fixture} fixture
- * @param {str[][]} results: array of elements like ['villain1', 'villain2', '1']
+ * @param {[][]} results: array of elements like ['villain1', 'villain2', 1]
  */
 function setResultsIntoFixture(fixture, results) {
     console.debug('setResultsIntoFixture');
@@ -340,7 +342,7 @@ function findVillain(name, villains) {
  *
  * @param {Villain[]} villains
  * @param {Fixture} fixture
- * @param {str[][]} results: array of elements like ['villain1', 'villain2', '1']
+ * @param {any[][]} results: array of elements like ['villain1', 'villain2', 1]
  * @returns {Fixture}
  */
 function loadFixture(villains, fixtureData, results) {
@@ -452,12 +454,10 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);
 
     // A) Either load fixture from rounds data
-    const fixture = loadFixture(villains, roundsData, resultsData);
-    console.log(resultsToJson(fixture));
-    // B) or Generate new fixture from updated villains data
-    //const fixture = generateFixture(villains);
-    //console.log(fixtureToJson(fixture));
-    //setResultsIntoFixture(fixture, resultsData);
+    //const fixture = loadFixture(villains, roundsData, resultsData);
+    // B) or Generate new fixture from villains data
+    const fixture = generateFixture(villains, resultsData);
+    console.log(fixtureToJson(fixture));
 
     // Draw fixture as HTML
     drawFixtureHtml(fixture);
