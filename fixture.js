@@ -152,7 +152,7 @@ function getRoundsBerger(villains) {
     console.debug('getRoundsBerger');
     let rows = [];  // Rounds but only with the item ids
     let rounds = [];
-    const n = villains.length;
+    let n = villains.length;
 
     // Add dummy element if number is odd
     if (n % 2 > 0) {
