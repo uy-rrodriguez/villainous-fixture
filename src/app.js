@@ -454,10 +454,10 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);
 
     // A) Either load fixture from rounds data
-    //const fixture = loadFixture(villains, roundsData, resultsData);
+    const fixture = loadFixture(villains, roundsData, resultsData);
     // B) or Generate new fixture from villains data
-    const fixture = generateFixture(villains, resultsData);
-    console.log(fixtureToJson(fixture));
+    //const fixture = generateFixture(villains, resultsData);
+    //console.log(fixtureToJson(fixture));
 
     // Draw fixture as HTML
     drawFixtureHtml(fixture);
