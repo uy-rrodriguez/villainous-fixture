@@ -292,12 +292,12 @@ function resultsToJson(fixture) {
     fixture.rounds.forEach(round => {
         const pairs = [];
         round.forEach(pair => {
-            comnsole.debug(pair);
+            console.debug(pair);
             const winner =
                 pair.winner === pair.item1 ? 1
                 : pair.winner === pair.item2 ? 2
                 : null;
-            comnsole.debug(winner);
+            console.debug(winner);
             if (winner) {
                 pairs.push([pair.item1.name, pair.item2.name, winner]);
             }
