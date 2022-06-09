@@ -19,6 +19,10 @@
 
 const villainsData = [
   {
+    "name": "Madame Mim",
+    "img": "mim.jpg"
+  },
+  {
     "name": "Hades",
     "img": "hades.jpg"
   },
@@ -53,6 +57,14 @@ const villainsData = [
   {
     "name": "Gaston",
     "img": "gaston.jpg"
+  },
+  {
+    "name": "Syndrome",
+    "img": "syndrome.jpg"
+  },
+  {
+    "name": "Lotso",
+    "img": "lotso.jpg"
   },
   {
     "name": "Lady Tremaine",
