@@ -62,9 +62,13 @@
         function onLoad(villainsData, roundsData) {
             const villains = loadVillains(villainsData);
 
-            // const fixture = getFixture(villains);
-            const fixture = loadFixture(villains, roundsData);
-            // console.log(printFixture(fixture));
+            // A) Either load fixture from rounds data
+            // const fixture = loadFixture(villains, roundsData);
+            // B) or Generate new data froim updated villains file
+            const fixture = getFixture(villains);
+            console.log(printFixture(fixture));
+
+            // Draw fixture as HTML
             drawFixture(fixture);
 
             // Calculate header size once
