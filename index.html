@@ -31,8 +31,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
 
-        <link href="./base.css?v={{ site.github.build_revision }}" rel="stylesheet" />
-        <link href="./villains.css?v={{ site.github.build_revision }}" rel="stylesheet" />
+        <link href="./assets/css/base.css?v={{ site.github.build_revision }}" rel="stylesheet" />
+        <link href="./assets/css/villains.css?v={{ site.github.build_revision }}" rel="stylesheet" />
     </head>
     <body>
         <div class="top">
@@ -54,54 +54,17 @@
         </div>
     </body>
 
-    <script src="animations.js?v={{ site.github.build_revision }}"></script>
-    <script src="fixture.js?v={{ site.github.build_revision }}"></script>
-    <script src="villains_data.js?v={{ site.github.build_revision }}"></script>
-    <script src="rounds_data.js?v={{ site.github.build_revision }}"></script>
+    <script src="src/animations.js?v={{ site.github.build_revision }}"></script>
+    <script src="src/app.js?v={{ site.github.build_revision }}"></script>
+    <script src="data/villains.js?v={{ site.github.build_revision }}"></script>
+    <script src="data/rounds.js?v={{ site.github.build_revision }}"></script>
+    <script src="data/results.js?v={{ site.github.build_revision }}"></script>
     <script>
-        function onLoad(villainsData, roundsData) {
-            const villains = loadVillains(villainsData);
-
-            // A) Either load fixture from rounds data
-            // const fixture = loadFixture(villains, roundsData);
-            // B) or Generate new data froim updated villains file
-            const fixture = getFixture(villains);
-            console.log(printFixture(fixture));
-
-            // Draw fixture as HTML
-            drawFixture(fixture);
-
-            // Calculate header size once
-            animateHeader();
-
-            // Load rounds
-            const currentRound = fixture.current;
-            const rounds = document.getElementById("rounds");
-            for (let i = 1; i <= fixture.rounds.length; i++) {
-                const option = document.createElement("option");
-                option.text = "Round " + i;
-                option.value = `${i}`;
-                if (i < currentRound) {
-                    option.classList.add("complete");
-                } else if (i === currentRound) {
-                    option.classList.add("current");
-                }
-                rounds.add(option);
-            }
-            rounds.onchange = (evt) => {
-                scrollToRound(evt.target.value, true);
-            };
-
-            // Go to current round
-            rounds.value = currentRound;
-            rounds.dispatchEvent(new Event("change"));
-        }
-
         window.onscroll = animateHeader;
         window.onload = () => {
             // Load fixture
-            // Villains and Rounds data loaded from separate JS files
-            onLoad(villainsData, roundsData);
+            // Villains, Rounds and Results data are loaded from imported JS files
+            onPageLoad(villainsData, roundsData, resultsData);
 
             // fetch("villains.json")
             //     .then((response) => response.json())
