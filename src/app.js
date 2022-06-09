@@ -305,13 +305,13 @@ function resultsToJson(fixture) {
     // JSONify manually, to avoid line breaks inside a result array
     if (pairs.length > 0) {
         let jsonified = '[';
-        pairs.forEach(pair => jsonified += `\n  ${pair},`);
-        jsonified = jsonified.substring(0, jsonified-2);  // Remove last ","
+        pairs.forEach(pair => jsonified += `\n  ["${pair[0]}", "${pair[1]}", ${pair[2]}],`);
+        jsonified = jsonified.slice(0, -1);  // Remove last ","
         jsonified += '\n]';
-        return jsonified;
+        console.log(jsonified);
     }
     else {
-        return '[]';
+        console.log('[]');
     }
 }
 
