@@ -237,9 +237,7 @@ function generateFixture(villains, results) {
  * @param {[][]} results: array of elements like ['villain1', 'villain2', 1]
  */
 function setResultsIntoFixture(fixture, results) {
-    console.debug('setResultsIntoFixture');
     const resultsCopy = results.slice();
-    console.debug(resultsCopy);
     fixture.rounds.forEach((round_pairs) => round_pairs.forEach((pair) => {
         let result = null;
         let i = 0;
@@ -247,7 +245,6 @@ function setResultsIntoFixture(fixture, results) {
             if (resultsCopy[i].indexOf(pair.item1.name) >= 0
                     && resultsCopy[i].indexOf(pair.item2.name) >= 0) {
                 result = resultsCopy.splice(i, 1)[0];
-                console.debug(`Found result: ${result}`);
 
                 // Set winner Villain depending on the stored value
                 const winnerName = result[result[2]-1];  // Stored winner value is either 1 or 2
@@ -259,7 +256,6 @@ function setResultsIntoFixture(fixture, results) {
             i++;
         }
     }));
-    console.debug(fixture);
 }
 
 /**
@@ -304,7 +300,9 @@ function resultsToJson(fixture) {
                 : pair.winner === pair.item2 ? 2
                 : null;
             if (winner !== null) {
-                pairs.push([pair.item1.name, pair.item2.name, winner]);
+                const pair = [pair.item1.name, pair.item2.name, winner];
+                console.debug(pair);
+                pairs.push(pair);
             }
         });
     });
