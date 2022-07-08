@@ -18,4 +18,5 @@ resultsData = [
   ["Evil Queen",      "Pete",             1],
   ["Hades",           "Scar",             1],
   ["Scar",            "Cruella",          2],
+  ["Syndrome",        "Lotso",            2],
 ];
