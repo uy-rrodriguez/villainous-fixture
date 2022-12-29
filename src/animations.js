@@ -31,8 +31,13 @@ function animateHeader() {
 }
 
 function scrollToRound(round, smooth) {
+	// Delta depending on height of the top banner
+	// Round 1 is at the top of the page, so the banner is shown in full
+	const delta = round == 1 ? 91 : 49;
+
 	const roundElem = document.getElementById("round" + round);
-	const top = roundElem.offsetTop;
+	const top = roundElem.offsetTop - delta;
+
 	window.scrollTo({
 	  top: top,
 	  behavior: (smooth ? "smooth" : "auto")
