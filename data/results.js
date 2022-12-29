@@ -38,4 +38,5 @@ resultsData = [
   ["Hades",           "Scar",             1],
   ["Scar",            "Cruella",          2],
   ["Syndrome",        "Lotso",            2],
+  ["Madame Mim",      "Hades",            1],
 ];
