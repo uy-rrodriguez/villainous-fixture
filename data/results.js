@@ -18,6 +18,7 @@
  */
 
 resultsData = [
+  // Round 1
   ["Hades",           "Cruella",          1],
   ["Scar",            "Evil Queen",       2],
   ["Pete",            "Maleficent",       1],
@@ -27,7 +28,9 @@ resultsData = [
   ["Queen of Hearts", "Mother Gothel",    1],
   ["Captain Hook",    "Horned King",      1],
   ["Gaston",          "Lady Tremaine",    2],
-  ["Cruella",         "Lady Tremaine",    2],
+  ["Syndrome",        "Lotso",            2],
+
+  // Round 2
   ["Horned King",     "Gaston",           1],
   ["Mother Gothel",   "Captain Hook",     1],
   ["Prince John",     "Queen of Hearts",  2],
@@ -35,8 +38,9 @@ resultsData = [
   ["Jafar",           "Yzma",             2],
   ["Maleficent",      "Ursula",           1],
   ["Evil Queen",      "Pete",             1],
-  ["Hades",           "Scar",             1],
-  ["Scar",            "Cruella",          2],
-  ["Syndrome",        "Lotso",            2],
+  ["Cruella",         "Scar",             2],
   ["Madame Mim",      "Hades",            1],
+
+  // Round 4
+  ["Hades",           "Scar",             1],
 ];
