@@ -31,6 +31,7 @@ resultsData = [
   ["Syndrome",        "Lotso",            2],
 
   // Round 2
+  ["Lady Tremaine",   "Syndrome",         1],
   ["Horned King",     "Gaston",           1],
   ["Mother Gothel",   "Captain Hook",     1],
   ["Prince John",     "Queen of Hearts",  2],
