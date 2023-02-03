@@ -43,5 +43,6 @@ resultsData = [
   ["Madame Mim",      "Hades",            1],
 
   // Round 4
+  ["Ursula",          "Evil Queen",       2],
   ["Hades",           "Scar",             1],
 ];
