@@ -42,7 +42,10 @@ resultsData = [
   ["Cruella",         "Scar",             2],
   ["Madame Mim",      "Hades",            1],
 
-  // Round 4
+  // Round 3
   ["Ursula",          "Evil Queen",       2],
+  ["Queen of Hearts", "Dr. Facilier",     1],
+
+  // Round 4
   ["Hades",           "Scar",             1],
 ];
