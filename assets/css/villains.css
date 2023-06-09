@@ -103,6 +103,81 @@ body {
 
 
 /*
+ * STANDINGS
+ */
+#standings-container {
+    position: fixed;
+    left: 0;
+}
+
+.standings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 1rem;
+    background-color: #5b52a1;
+    border: 3px solid #3d3769;
+    border-width: 0 3px 3px 0;
+    border-bottom-right-radius: 16px;
+}
+
+.standings-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.standings-item {
+}
+
+.standings-item .results {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.standings-item.standings-first .results {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.standings-first .villain .villain-img-wrapper {
+    border: 5px solid orange;
+    border-radius: 10px;
+}
+
+.standings-item.standings-first .villain-img {
+    width: 12rem;
+    height: 12rem;
+}
+
+.standings-item:not(.standings-first) .villain-img {
+    width: 10rem;
+    height: 10rem;
+}
+
+.standings-item:not(.standings-first) .villain:before {
+    width: 10rem;
+    height: 10rem;
+}
+
+.standings-last {
+}
+
+.standings-before-last {
+    margin-left: 4rem;
+    margin-bottom: 2rem;
+    font-family: serif;
+    font-size: 8rem;
+    line-height: 0;
+    color: #3d3769;
+    writing-mode: vertical-lr;
+    user-select: none;
+}
+
+
+/*
  * CONTENT
  */
 #fixture-container {

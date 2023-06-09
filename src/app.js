@@ -492,6 +492,89 @@ function drawFixtureHtml(fixture) {
 }
 
 /**
+ * Generates HTML code to display the current standings.
+ *
+ * @param {Fixture} fixture
+ */
+function drawStandingsHtml(fixture) {
+    const points = new Map();
+    const wins = new Map();
+    const losses = new Map();
+    fixture.rounds.forEach((round, round_idx) => {
+        round.forEach((pair, pair_idx) => {
+            // Count only played matches
+            if (pair.score1 || pair.score2) {
+                points.set(pair.item1, (points.get(pair.item1) ?? 0) + pair.score1);
+                points.set(pair.item2, (points.get(pair.item2) ?? 0) + pair.score2);
+                if (pair.winner) {
+                    wins.set(pair.winner, (wins.get(pair.winner) ?? 0) + 1);
+                    const loser = (pair.winner === pair.item1) ? pair.item2 : pair.item1;
+                    losses.set(loser, (losses.get(loser) ?? 0) + 1);
+                }
+            }
+        });
+    });
+
+    const sortCoef = a => 2 * a.points + a.wins - a.losses;
+    const standings = Array.from(points)
+        .map(([k, v]) => ({
+            villain: k,
+            points: v,
+            wins: wins.get(k) ?? 0,
+            losses: losses.get(k) ?? 0,
+        }))
+        .sort((a, b) => sortCoef(b) - sortCoef(a));
+    console.debug(standings);
+
+    const container = document.createElement("div");
+    container.classList.add("standings");
+
+    // Title
+    // const title = document.createElement("div");
+    // title.classList.add("standings-title");
+    // title.textContent = "Standings";
+    // container.appendChild(title);
+
+    // Villains in top 3 and last position
+    for (let i of [0, 1, 2, standings.length - 1]) {
+        const data = standings[i];
+        const isFirst = sortCoef(data) === sortCoef(standings[0]);
+        const isLast = i === standings.length - 1;
+
+        const item = document.createElement("div");
+        item.classList.add("standings-item");
+        if (isFirst) {
+            item.classList.add("standings-first");
+        } else if (isLast) {
+            item.classList.add("standings-last");
+        }
+
+        item.innerHTML =
+            `<div class="villain ${isLast ? 'villain-lost' : ''}">
+                <div class="villain-img-wrapper">
+                    <img class="villain-img" src="assets/img/${data.villain.image}" />
+                </div>
+            </div>
+            <div class="results">
+                ${data.points} P &nbsp;&nbsp;
+                ${data.wins} W &nbsp;&nbsp;
+                ${data.losses} L
+            </div>`;
+
+        if (isLast) {
+            const filler = document.createElement("div");
+            filler.classList.add("standings-before-last");
+            filler.textContent = "...";
+            container.appendChild(filler);
+        }
+
+        container.appendChild(item);
+    }
+
+    document.getElementById("standings-container").appendChild(container);
+}
+
+/**
  * Logic to be executed when the HTML page loads.
  *
  * @param {{ "name": string, "img": string }[]} villainsData
@@ -509,6 +592,7 @@ function onPageLoad(villainsData, roundsData, resultsData) {
 
     // Draw fixture as HTML
     drawFixtureHtml(fixture);
+    drawStandingsHtml(fixture);
 
     // Calculate header size once
     animateHeader();
