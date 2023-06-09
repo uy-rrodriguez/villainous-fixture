@@ -19,94 +19,157 @@
 
 /**
  * Villain with name and image.
- *
- * @param {int} id
- * @param {string} name
- * @param {string} image
- * @constructor
  */
-function Villain(name, image) {
-    this.name = name;
-    this.image = image;
+class Villain {
+    /**
+     * @param {int} id
+     * @param {string} name
+     * @param {string} image
+     */
+    constructor(name, image) {
+        /**
+         * @type {string}
+         */
+        this.name = name;
+        /**
+         * @type {string}
+         */
+        this.image = image;
+    }
+    toString() {
+        return `${this.name}`;
+    }
 }
-Villain.prototype.toString = function () {
-    return `${this.name}`;
-};
 
 /**
- * Pair of values.
- *
- * @param {Villain} item1
- * @param {Villain} item2
- * @constructor
+ * Pair of villains, representing a match.
  */
-function Pair (item1, item2) {
-    this.item1 = item1;
-    this.item2 = item2;
-    this.winner = null;
+class Pair {
+    /**
+     * @param {Villain} item1   Villain 1.
+     * @param {Villain} item2   Villain 2.
+     */
+    constructor(item1, item2) {
+        /**
+         * @type {Villain}
+         */
+        this.item1 = item1;
+        /**
+         * @type {Villain}
+         */
+        this.item2 = item2;
+        /**
+         * @type {Villain}
+         */
+        this.winner = null;
+        /**
+         * @type {int}
+         */
+        this.score1 = 0;
+        /**
+         * @type {int}
+         */
+        this.score2 = 0;
+    }
+    toString() {
+        return `(${this.item1}, ${this.item2})`;
+    }
+    /**
+     * Set the results for this match.
+     *
+     * @param {int} score1 Number of games won by villain 1.
+     * @param {int} score2 Number of games won by villain 2.
+     */
+    setScores(score1, score2) {
+        this.score1 = score1;
+        this.score2 = score2;
+        this.setWinner();
+    }
+    /**
+     * Updatest the value of `winner` depending on scores.
+     */
+    setWinner() {
+        if (this.score1 > this.score2) {
+            this.winner = this.item1;
+        } else if (this.score2 > this.score1) {
+            this.winner = this.item2;
+        }
+    }
 }
-Pair.prototype.toString = function () {
-    return `(${this.item1}, ${this.item2})`;
-};
 
 /**
  * Round represented as a list of `Pair` elements.
- *
- * @constructor
  */
-function Round (pairs) {
-    this.pairs = pairs;
+class Round {
+    /**
+     * @param {Pair[]} pairs Pairs of villains for the round.
+     */
+    constructor(pairs) {
+        /**
+         * @type {Pair[]}
+         */
+        this.pairs = pairs;
+    }
+    toString() {
+        return `${this.pairs}`;
+    }
+    /**
+     * @param {Pair} pair
+     */
+    push(pair) {
+        this.pairs.push(pair);
+    }
+    /**
+     * @returns {Pair}
+     */
+    pop() {
+        return this.pairs.pop();
+    }
+    /**
+     *
+     * @param {(value: Pair, index: number, array: Pair[]) => void} callbackfn
+     */
+    forEach(callbackfn) {
+        return this.pairs.forEach(callbackfn);
+    }
+    /**
+     * @returns {int}
+     */
+    length() {
+        return this.pairs.length;
+    }
+    /**
+     * @returns {Round}
+     */
+    copy() {
+        return new Round(this.pairs.slice());
+    }
 }
-Round.prototype.toString = function () {
-    return `${this.pairs}`;
-};
-/**
- * @param {Pair} pair
- */
-Round.prototype.push = function (pair) {
-    this.pairs.push(pair);
-};
-/**
- * @returns {Pair}
- */
-Round.prototype.pop = function () {
-    return this.pairs.pop();
-};
-/**
- *
- * @param stepCallback
- * @returns {*}
- */
-Round.prototype.forEach = function (stepCallback) {
-    return this.pairs.forEach(stepCallback);
-};
-/**
- * @returns {int}
- */
-Round.prototype.length = function () {
-    return this.pairs.length;
-};
-/**
- * @returns {Round}
- */
-Round.prototype.copy = function () {
-    return new Round(this.pairs.slice());
-};
 
 /**
  * Fixture with a list of rounds.
- *
- * @param {int} current
- * @param {Round[]} rounds
- * @constructor
  */
-function Fixture (current, rounds) {
-    this.current = current;
-    this.rounds = rounds;
+class Fixture {
+    /**
+     * Fixture with a list of rounds.
+     *
+     * @param {int} current     Number of the current round (starting by 1).
+     * @param {Round[]} rounds  List of Rounds.
+     */
+    constructor(current, rounds) {
+        /**
+         * @type {int}
+         */
+        this.current = current;
+        /**
+         * @type {Round[]}
+         */
+        this.rounds = rounds;
+    }
+    toString() {
+        return `Current round = ${this.current}; Rounds: ${this.rounds}`;
+    }
 }
-Fixture.prototype.toString = function () {
-    return `Current round = ${this.current}; Rounds: ${this.rounds}`;
-};
 
 
 /**
@@ -221,6 +284,7 @@ function getRoundsBerger(villains) {
  * Generates a list of rounds from a list of Villains.
  *
  * @param {Villain[]} villains
+ * @param {any[][]} results Array of elements like ['villain1', score1, 'villain2', score2]
  * @returns {Fixture}
  */
 function generateFixture(villains, results) {
@@ -234,28 +298,25 @@ function generateFixture(villains, results) {
  * Sets the results into a Fixture, from the given Results list.
  *
  * @param {Fixture} fixture
- * @param {[][]} results: array of elements like ['villain1', 'villain2', 1]
+ * @param {any[][]} results Array of elements like ['villain1', score1, 'villain2', score2]
  */
 function setResultsIntoFixture(fixture, results) {
     const resultsCopy = results.slice();
-    fixture.rounds.forEach((round_pairs) => round_pairs.forEach((pair) => {
-        let result = null;
-        let i = 0;
-        while (result === null && i < resultsCopy.length) {
-            if (resultsCopy[i].indexOf(pair.item1.name) >= 0
-                    && resultsCopy[i].indexOf(pair.item2.name) >= 0) {
-                result = resultsCopy.splice(i, 1)[0];
-
-                // Set winner Villain depending on the stored value
-                const winnerName = result[result[2]-1];  // Stored winner value is either 1 or 2
-                pair.winner =
-                    winnerName === pair.item1.name ? pair.item1
-                    : winnerName === pair.item2.name ? pair.item2
-                    : null;
+    fixture.rounds.forEach((round_pairs) =>
+        round_pairs.forEach((pair) => {
+            let result = null;
+            let i = 0;
+            while (result === null && i < resultsCopy.length) {
+                const idxVillain1 = resultsCopy[i].indexOf(pair.item1.name);
+                const idxVillain2 = resultsCopy[i].indexOf(pair.item2.name);
+                if (idxVillain1 >= 0 && idxVillain2 >= 0) {
+                    result = resultsCopy.splice(i, 1)[0];
+                    pair.setScores(result[idxVillain1 + 1], result[idxVillain2 + 1]);
+                }
+                i++;
             }
-            i++;
-        }
-    }));
+        })
+    );
 }
 
 /**
@@ -295,22 +356,16 @@ function resultsToJson(fixture) {
     const pairs = [];
     fixture.rounds.forEach(round => {
         round.forEach(pair => {
-            const winner =
-                pair.winner === pair.item1 ? 1
-                : pair.winner === pair.item2 ? 2
-                : null;
-            if (winner !== null) {
-                const pair = [pair.item1.name, pair.item2.name, winner];
-                console.debug(pair);
-                pairs.push(pair);
-            }
+            pair = [pair.item1.name, pair.score1, pair.item2.name, pair.score2];
+            console.debug(pair);
+            pairs.push(pair);
         });
     });
 
     // JSONify manually, to avoid line breaks inside a result array
     if (pairs.length > 0) {
         let jsonified = '[';
-        pairs.forEach(pair => jsonified += `\n  ["${pair[0]}", "${pair[1]}", ${pair[2]}],`);
+        pairs.forEach(pair => jsonified += `\n  ["${pair[0]}", ${pair[1]}, "${pair[2]}", ${pair[3]}],`);
         jsonified = jsonified.slice(0, -1);  // Remove last ","
         jsonified += '\n]';
         console.log(jsonified);
@@ -341,8 +396,8 @@ function findVillain(name, villains) {
  * Sets winners from the given results array.
  *
  * @param {Villain[]} villains
- * @param {Fixture} fixture
- * @param {any[][]} results: array of elements like ['villain1', 'villain2', 1]
+ * @param {Fixture} fixtureData
+ * @param {any[][]} results     Array of elements like ['villain1', score1, 'villain2', score2]
  * @returns {Fixture}
  */
 function loadFixture(villains, fixtureData, results) {
@@ -369,8 +424,6 @@ function loadFixture(villains, fixtureData, results) {
  */
 function drawFixtureHtml(fixture) {
     const container = document.createElement("div");
-    const hr = document.createElement("hr");
-    hr.classList.add("thin-hr");
 
     fixture.rounds.forEach((round_pairs, round_idx) => {
         const panel = document.createElement("div");
@@ -408,26 +461,30 @@ function drawFixtureHtml(fixture) {
                 resultClass2 = "villain-won";
             }
 
+            // Score is dislayed only if there is data
+            let scoresHtml = '<span class="villain-vs">vs</span>';
+            if (pair.score1 || pair.score2) {
+                scoresHtml =
+                    `<span class="villain-score">${pair.score1}</span>
+                    <span class="villain-vs">-</span>
+                    <span class="villain-score">${pair.score2}</span>`;
+            }
+
+            // Row with pairing
             row.innerHTML =
                 `<div class="villain villain-left ${resultClass1} col-xs-5">
-                     <div class="text-right">
-                         <div class="villain-img-wrapper">
-                             <img class="villain-img" src="assets/img/${pair.item1.image}" />
-                         </div>
-                     </div>
+                    <div class="villain-img-wrapper">
+                        <img class="villain-img" src="assets/img/${pair.item1.image}" />
+                    </div>
                 </div>
-                <div class="col-xs-2 text-center villain-vs">vs</div>
+                <div class="col-xs-2 text-center villain-vs-wrapper">
+                    ${scoresHtml}
+                </div>
                 <div class="villain villain-right ${resultClass2} col-xs-5">
-                    <div class="text-left">
-                        <div class="villain-img-wrapper">
-                            <img class="villain-img" src="assets/img/${pair.item2.image}" />
-                        </div>
+                    <div class="villain-img-wrapper">
+                        <img class="villain-img" src="assets/img/${pair.item2.image}" />
                     </div>
                 </div>`;
-
-            if (pair_idx < round_pairs.length - 1) {
-                row.appendChild(hr.cloneNode());
-            }
         });
     });
 
@@ -436,8 +493,10 @@ function drawFixtureHtml(fixture) {
 
 /**
  * Logic to be executed when the HTML page loads.
- * 
- * @param {Fixture} fixture
+ *
+ * @param {{ "name": string, "img": string }[]} villainsData
+ * @param {Fixture} roundsData
+ * @param {[string, int, string, int][]} resultsData
  */
 function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);

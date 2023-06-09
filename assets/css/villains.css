@@ -125,24 +125,25 @@ body {
     font-size: 20px;
 }
 
+.panel-body > .row {
+    justify-content: center;
+}
+
 
 /*
  * VILLAIN ITEM
  */
-.villain-vs {
-    justify-content: center;
-    font-size: 1.2rem;
-}
 
 .villain {
+    position: relative;
     padding: 0;
+    width: auto;
 }
 
 .villain-img-wrapper {
     display: inline-block;
     position: relative;
     border-radius: 1rem;
-    overflow: hidden;
 }
 
 .villain-img {
@@ -176,7 +177,7 @@ body {
     content: "";
     display: block;
     position: absolute;
-    top: 0.7rem;
+    /* top: 0.7rem; */
     width: 14rem;
     height: 14rem;
     box-shadow: inset 0 0 2rem 2rem #3d3769;
@@ -184,14 +185,26 @@ body {
     z-index: 1;
 }
 .villain-left.villain-lost:before {
-    right: 1rem;
+    /* right: 1rem; */
 }
 .villain-right.villain-lost:before {
-    left: 1rem;
+    /* left: 1rem; */
 }
 
 .villain-lost img.villain-img {
     width: 14rem;
     height: 14rem;
     opacity: 0.75;
+}
+
+.villain-vs-wrapper {
+    justify-content: center;
+}
+
+.villain-vs {
+    margin: 0 .5rem;
+}
+
+.villain-score {
+    font-size: 3rem;
 }
