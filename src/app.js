@@ -524,7 +524,7 @@ function drawStandingsHtml(fixture) {
             losses: losses.get(k) ?? 0,
         }))
         .sort((a, b) => sortCoef(b) - sortCoef(a));
-    console.debug(standings);
+    //console.debug(standings);
 
     const container = document.createElement("div");
     container.classList.add("standings");
