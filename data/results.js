@@ -48,4 +48,7 @@ resultsData = [
 
   // Round 11
   ["Madame Mim",      2,  "Hades",            0],
+
+  // Round 13
+  ["Oogie Boogie",    2,  "Scar",             1],
 ];
