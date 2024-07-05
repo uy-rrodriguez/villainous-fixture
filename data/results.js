@@ -38,14 +38,14 @@ resultsData = [
   ["Jafar",           1,  "Yzma",             2],
   ["Maleficent",      2,  "Ursula",           1],
   ["Evil Queen",      2,  "Pete",             1],
-  ["Cruella",         1,  "Scar",             2],
-  ["Madame Mim",      2,  "Hades",            0],
+  ["Hades",           2,  "Scar",             1],
 
   // Round 3
+  ["Scar",            2,  "Cruella",          1],
   ["Ursula",          1,  "Evil Queen",       2],
   ["Queen of Hearts", 2,  "Dr. Facilier",     1],
-  ["Prince John",     1,  "Captain Hook",     1], // Unfinished
+  ["Captain Hook",    1,  "Prince John",      1], // Unfinished
 
-  // Round 4
-  ["Hades",           2,  "Scar",             1],
+  // Round 11
+  ["Madame Mim",      2,  "Hades",            0],
 ];
