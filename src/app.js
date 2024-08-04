@@ -39,6 +39,15 @@ class Villain {
     toString() {
         return `${this.name}`;
     }
+    /**
+     * Returns whether both items refer to the same villain.
+     *
+     * @param {villain} other Another villain to compare.
+     * @returns {boolean}
+     */
+    equals(other) {
+        return this.name === other.name;
+    }
 }
 
 /**
@@ -95,6 +104,41 @@ class Pair {
             this.winner = this.item2;
         }
     }
+    /**
+     * Creates a shallow copy of this element.
+     * @returns {Pair}
+     */
+    copy() {
+        const pair = new Pair(this.item1, this.item2);
+        pair.score1 = this.score1;
+        pair.score2 = this.score2;
+        pair.winner = this.winner;
+        return pair;
+    }
+    /**
+     * Returns whether both pairs refer to the same items.
+     *
+     * @param {Pair} other Another pair to compare.
+     * @returns {boolean}
+     */
+    equals(other) {
+        return this.item1.equals(other.item1)
+          && this.item2.equals(other.item2)
+          || this.item1.equals(other.item2)
+          && this.item2.equals(other.item1);
+    }
+    /**
+     * Returns whether the pairs share at least one item.
+     *
+     * @param {Pair} other Another pair to compare.
+     * @returns {boolean}
+     */
+    intersects(other) {
+        return this.item1.equals(other.item1)
+          || this.item2.equals(other.item2)
+          || this.item1.equals(other.item2)
+          || this.item2.equals(other.item1);
+    }
 }
 
 /**
@@ -118,12 +162,15 @@ class Round {
      */
     push(pair) {
         this.pairs.push(pair);
+        pair.round = this;
     }
     /**
      * @returns {Pair}
      */
     pop() {
-        return this.pairs.pop();
+        pair = this.pairs.pop();
+        pair.round = null;
+        return pair;
     }
     /**
      *
@@ -142,7 +189,23 @@ class Round {
      * @returns {Round}
      */
     copy() {
-        return new Round(this.pairs.slice());
+        const pairs = this.pairs.map(Pair.copy);
+        const round = new Round(pairs);
+        return round;
+    }
+    /**
+     * Returns where the pair appears in this round.
+     *
+     * @param {Pair} pair A pair to search for.
+     * @returns {boolean}
+     */
+    contains(pair) {
+        for (let p of this.pairs) {
+            if (p.equals(pair)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
@@ -168,6 +231,20 @@ class Fixture {
     }
     toString() {
         return `Current round = ${this.current}; Rounds: ${this.rounds}`;
+    }
+    /**
+     * Returns where the pair appears in any round of this fixture.
+     *
+     * @param {Pair} pair A pair to search for.
+     * @returns {boolean}
+     */
+    contains(pair) {
+        for (let r of this.rounds) {
+            if (r.contains(pair)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
@@ -281,15 +358,76 @@ function getRoundsBerger(villains) {
 }
 
 /**
+ * Adds the missing pairs from every round of roundsB into roundsA.
+ *
+ * Since the distribution of pairs in the rounds might differ,
+ * including the length of rounds, all new pairs from B are added
+ * to A causing minimal disruption. All pairs in B that are not in
+ * A, are distributed by order of appearance at the end of the
+ * rounds of A, making sure that all rounds have the same length as
+ * they have in B.
+ *
+ * @param {Round[]} a
+ * @param {Round[]} b
+ * @returns {Round[]}
+ */
+function mergeRounds(a, b) {
+    // The result is a shallow copy of A
+    const result = a.map(Round.copy);
+
+    // Extract pairings from B not in A
+    const fixA = new Fixture(1, a);
+    const newPairs = b
+        .flatMap((r) => r.pairs)
+        .filter((p) => ! fixA.contains(p));
+
+    // Calculate difference of round length between A and B
+    const roundLength = b[0].length();
+    const diff = roundLength - a[0].length();
+
+    // Add pairs to rounds of A equal to the difference
+    for (let round of result) {
+        // Filter pairs from B that can be added to this round
+        const validPairs = newPairs
+            .filter((bp) =>
+                ! round.some((ap) => ap.intersects(bp));
+    
+        // Add pairs to A
+        validPairs = validPairs.splice(0, Math.min(diff, validPairs.length));
+        validPairs.forEach((bp) => round.push(bp));
+
+        // Remove from pending
+        newPairs = newPairs.filter((bp) => ! validPairs.contains(bp));
+    }
+
+    // Remaining pairs are placed into additional rounds
+    const extraRounds = newPairs.length / roundLength;
+    for (let i = 0; i < newPairs.length; i += roundLength) {
+        const newRound = newPairs.slice(i, i + roundLength);
+        result.push(new Round(newRound));
+    }
+
+    return result;
+}
+
+/**
  * Generates a list of rounds from a list of Villains.
  *
  * @param {Villain[]} villains
  * @param {any[][]} results Array of elements like ['villain1', score1, 'villain2', score2]
+ * @param {Fixture} fixtureToUpdate (Optional) Existing fixture to update based on the new
+       rounds calculated from the given villains. Useful when villains are added and you
+       don't want to alter the entire fixture.
  * @returns {Fixture}
  */
-function generateFixture(villains, results) {
-    const rounds = getRoundsBerger(villains);
-    const fixture = new Fixture(1, rounds);
+function generateFixture(villains, results, fixtureToUpdate = null) {
+    let rounds = getRoundsBerger(villains);
+    let currentRound = 1;
+    if (fixtureToUpdate != null) {
+        rounds = mergeRounds(fixtureToUpdate.rounds, rounds);
+        currentRound = fixtureToUpdate.current;
+    }
+    const fixture = new Fixture(currentRound, rounds);
     setResultsIntoFixture(fixture, results);
     return fixture;
 }
@@ -585,10 +723,14 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);
 
     // A) Either load fixture from rounds data
-    const fixture = loadFixture(villains, roundsData, resultsData);
+    //const fixture = loadFixture(villains, roundsData, resultsData);
     // B) or Generate new fixture from villains data
     //const fixture = generateFixture(villains, resultsData);
     //console.log(fixtureToJson(fixture));
+    // C) or Updtate existing fixture with new villains data
+    const oldFixture = loadFixture(villains, roundsData, []);
+    const fixture = generateFixture(villains, resultsData, oldFixture);
+    console.log(fixtureToJson(fixture));
 
     // Draw fixture as HTML
     drawFixtureHtml(fixture);
