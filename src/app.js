@@ -189,7 +189,7 @@ class Round {
      * @returns {Round}
      */
     copy() {
-        const pairs = this.pairs.map(Pair.copy);
+        const pairs = this.pairs.map((p) => p.copy());
         const round = new Round(pairs);
         return round;
     }
@@ -351,7 +351,7 @@ function getRoundsBerger(villains) {
                 pairs.push(new Pair(villains[idx1], villains[idx2]));
             }
         }
-        rounds.push(pairs);
+        rounds.push(new Round(pairs));
     }
 
     return rounds;
@@ -373,11 +373,11 @@ function getRoundsBerger(villains) {
  */
 function mergeRounds(a, b) {
     // The result is a shallow copy of A
-    const result = a.map(Round.copy);
+    const result = a.map((r) => r.copy());
 
     // Extract pairings from B not in A
     const fixA = new Fixture(1, a);
-    const newPairs = b
+    let newPairs = b
         .flatMap((r) => r.pairs)
         .filter((p) => ! fixA.contains(p));
 
@@ -388,9 +388,9 @@ function mergeRounds(a, b) {
     // Add pairs to rounds of A equal to the difference
     for (let round of result) {
         // Filter pairs from B that can be added to this round
-        const validPairs = newPairs
+        let validPairs = newPairs
             .filter((bp) =>
-                ! round.some((ap) => ap.intersects(bp));
+                ! round.some((ap) => ap.intersects(bp)));
     
         // Add pairs to A
         validPairs = validPairs.splice(0, Math.min(diff, validPairs.length));
@@ -549,7 +549,7 @@ function loadFixture(villains, fixtureData, results) {
             );
             roundPairs.push(pair);
         });
-        fixture.rounds.push(roundPairs);
+        fixture.rounds.push(new Round(roundPairs));
     });
     setResultsIntoFixture(fixture, results);
     return fixture;
