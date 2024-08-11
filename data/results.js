@@ -45,7 +45,7 @@ resultsData = [
   // Round 3
   ["Ursula",          1,  "Evil Queen",       2],
   ["Queen of Hearts", 2,  "Dr. Facilier",     1],
-  ["Prince John",     1,  "Captain Hook",     1], // Unfinished
+  ["Prince John",     1,  "Captain Hook",     2],
 
   // Round 4
   ["Hades",           2,  "Scar",             1],
