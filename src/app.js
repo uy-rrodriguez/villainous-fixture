@@ -199,7 +199,7 @@ class Round {
      * @param {Pair} pair A pair to search for.
      * @returns {boolean}
      */
-    contains(pair) {
+    includes(pair) {
         for (let p of this.pairs) {
             if (p.equals(pair)) {
                 return true;
@@ -238,9 +238,9 @@ class Fixture {
      * @param {Pair} pair A pair to search for.
      * @returns {boolean}
      */
-    contains(pair) {
+    includes(pair) {
         for (let r of this.rounds) {
-            if (r.contains(pair)) {
+            if (r.includes(pair)) {
                 return true;
             }
         }
@@ -379,7 +379,7 @@ function mergeRounds(a, b) {
     const fixA = new Fixture(1, a);
     let newPairs = b
         .flatMap((r) => r.pairs)
-        .filter((p) => ! fixA.contains(p));
+        .filter((p) => ! fixA.includes(p));
 
     // Calculate difference of round length between A and B
     const roundLength = b[0].length();
@@ -390,14 +390,14 @@ function mergeRounds(a, b) {
         // Filter pairs from B that can be added to this round
         let validPairs = newPairs
             .filter((bp) =>
-                ! round.some((ap) => ap.intersects(bp)));
+                ! round.pairs.some((ap) => ap.intersects(bp)));
     
         // Add pairs to A
         validPairs = validPairs.splice(0, Math.min(diff, validPairs.length));
         validPairs.forEach((bp) => round.push(bp));
 
         // Remove from pending
-        newPairs = newPairs.filter((bp) => ! validPairs.contains(bp));
+        newPairs = newPairs.filter((bp) => ! validPairs.includes(bp));
     }
 
     // Remaining pairs are placed into additional rounds
@@ -723,14 +723,14 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);
 
     // A) Either load fixture from rounds data
-    //const fixture = loadFixture(villains, roundsData, resultsData);
+    const fixture = loadFixture(villains, roundsData, resultsData);
     // B) or Generate new fixture from villains data
     //const fixture = generateFixture(villains, resultsData);
     //console.log(fixtureToJson(fixture));
     // C) or Updtate existing fixture with new villains data
-    const oldFixture = loadFixture(villains, roundsData, []);
-    const fixture = generateFixture(villains, resultsData, oldFixture);
-    console.log(fixtureToJson(fixture));
+    //const oldFixture = loadFixture(villains, roundsData, []);
+    //const fixture = generateFixture(villains, resultsData, oldFixture);
+    //console.log(fixtureToJson(fixture));
 
     // Draw fixture as HTML
     drawFixtureHtml(fixture);
