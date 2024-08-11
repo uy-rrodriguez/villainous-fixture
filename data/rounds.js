@@ -60,21 +60,9 @@ const roundsData = {
       {
         "1": "Syndrome",
         "2": "Lotso"
-      },
-      {
-        "1": "Madame Mim",
-        "2": "Oogie Boogie"
       }
     ],
     [
-      {
-        "1": "Cruella",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Lotso",
-        "2": "Madame Mim"
-      },
       {
         "1": "Lady Tremaine",
         "2": "Syndrome"
@@ -108,18 +96,22 @@ const roundsData = {
         "2": "Pete"
       },
       {
-        "1": "Hades",
+        "1": "Cruella",
         "2": "Scar"
+      },
+      {
+        "1": "Madame Mim",
+        "2": "Hades"
       }
     ],
     [
       {
         "1": "Scar",
-        "2": "Cruella"
+        "2": "Madame Mim"
       },
       {
         "1": "Pete",
-        "2": "Hades"
+        "2": "Cruella"
       },
       {
         "1": "Ursula",
@@ -150,26 +142,14 @@ const roundsData = {
         "2": "Horned King"
       },
       {
-        "1": "Madame Mim",
+        "1": "Lotso",
         "2": "Lady Tremaine"
-      },
-      {
-        "1": "Oogie Boogie",
-        "2": "Lotso"
       }
     ],
     [
       {
-        "1": "Cruella",
-        "2": "Lotso"
-      },
-      {
-        "1": "Lady Tremaine",
-        "2": "Oogie Boogie"
-      },
-      {
         "1": "Horned King",
-        "2": "Madame Mim"
+        "2": "Lotso"
       },
       {
         "1": "Mother Gothel",
@@ -196,141 +176,49 @@ const roundsData = {
         "2": "Yzma"
       },
       {
-        "1": "Hades",
+        "1": "Cruella",
         "2": "Ursula"
       },
       {
-        "1": "Scar",
+        "1": "Madame Mim",
         "2": "Pete"
+      },
+      {
+        "1": "Hades",
+        "2": "Scar"
       }
     ],
     [
       {
         "1": "Pete",
-        "2": "Cruella"
-      },
-      {
-        "1": "Ursula",
-        "2": "Scar"
-      },
-      {
-        "1": "Yzma",
         "2": "Hades"
       },
       {
-        "1": "Ratigan",
-        "2": "Evil Queen"
-      },
-      {
-        "1": "Queen of Hearts",
-        "2": "Maleficent"
-      },
-      {
-        "1": "Captain Hook",
-        "2": "Jafar"
-      },
-      {
-        "1": "Gaston",
-        "2": "Dr. Facilier"
-      },
-      {
-        "1": "Syndrome",
-        "2": "Prince John"
-      },
-      {
-        "1": "Madame Mim",
-        "2": "Mother Gothel"
-      },
-      {
-        "1": "Oogie Boogie",
-        "2": "Horned King"
-      },
-      {
-        "1": "Lotso",
-        "2": "Lady Tremaine"
-      }
-    ],
-    [
-      {
-        "1": "Cruella",
-        "2": "Lady Tremaine"
-      },
-      {
-        "1": "Horned King",
-        "2": "Lotso"
-      },
-      {
-        "1": "Mother Gothel",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Prince John",
+        "1": "Ursula",
         "2": "Madame Mim"
       },
       {
-        "1": "Dr. Facilier",
-        "2": "Syndrome"
-      },
-      {
-        "1": "Jafar",
-        "2": "Gaston"
-      },
-      {
-        "1": "Maleficent",
-        "2": "Captain Hook"
-      },
-      {
-        "1": "Evil Queen",
-        "2": "Queen of Hearts"
-      },
-      {
-        "1": "Hades",
-        "2": "Ratigan"
-      },
-      {
-        "1": "Scar",
-        "2": "Yzma"
-      },
-      {
-        "1": "Pete",
-        "2": "Ursula"
-      }
-    ],
-    [
-      {
-        "1": "Ursula",
+        "1": "Yzma",
         "2": "Cruella"
       },
       {
-        "1": "Yzma",
-        "2": "Pete"
-      },
-      {
         "1": "Ratigan",
-        "2": "Scar"
-      },
-      {
-        "1": "Queen of Hearts",
-        "2": "Hades"
-      },
-      {
-        "1": "Captain Hook",
         "2": "Evil Queen"
       },
       {
-        "1": "Gaston",
+        "1": "Queen of Hearts",
         "2": "Maleficent"
       },
       {
-        "1": "Syndrome",
+        "1": "Captain Hook",
         "2": "Jafar"
       },
       {
-        "1": "Madame Mim",
+        "1": "Gaston",
         "2": "Dr. Facilier"
       },
       {
-        "1": "Oogie Boogie",
+        "1": "Syndrome",
         "2": "Prince John"
       },
       {
@@ -344,10 +232,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Cruella",
-        "2": "Horned King"
-      },
-      {
         "1": "Mother Gothel",
         "2": "Lady Tremaine"
       },
@@ -357,68 +241,64 @@ const roundsData = {
       },
       {
         "1": "Dr. Facilier",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Jafar",
-        "2": "Madame Mim"
-      },
-      {
-        "1": "Maleficent",
         "2": "Syndrome"
       },
       {
-        "1": "Evil Queen",
+        "1": "Jafar",
         "2": "Gaston"
       },
       {
-        "1": "Hades",
+        "1": "Maleficent",
         "2": "Captain Hook"
       },
       {
-        "1": "Scar",
+        "1": "Evil Queen",
         "2": "Queen of Hearts"
       },
       {
-        "1": "Pete",
+        "1": "Cruella",
         "2": "Ratigan"
       },
       {
-        "1": "Ursula",
+        "1": "Madame Mim",
         "2": "Yzma"
+      },
+      {
+        "1": "Hades",
+        "2": "Ursula"
+      },
+      {
+        "1": "Scar",
+        "2": "Pete"
       }
     ],
     [
       {
-        "1": "Yzma",
-        "2": "Cruella"
-      },
-      {
-        "1": "Ratigan",
-        "2": "Ursula"
-      },
-      {
-        "1": "Queen of Hearts",
-        "2": "Pete"
-      },
-      {
-        "1": "Captain Hook",
+        "1": "Ursula",
         "2": "Scar"
       },
       {
-        "1": "Gaston",
+        "1": "Yzma",
         "2": "Hades"
       },
       {
-        "1": "Syndrome",
+        "1": "Ratigan",
+        "2": "Madame Mim"
+      },
+      {
+        "1": "Queen of Hearts",
+        "2": "Cruella"
+      },
+      {
+        "1": "Captain Hook",
         "2": "Evil Queen"
       },
       {
-        "1": "Madame Mim",
+        "1": "Gaston",
         "2": "Maleficent"
       },
       {
-        "1": "Oogie Boogie",
+        "1": "Syndrome",
         "2": "Jafar"
       },
       {
@@ -436,10 +316,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Cruella",
-        "2": "Mother Gothel"
-      },
-      {
         "1": "Prince John",
         "2": "Horned King"
       },
@@ -453,60 +329,56 @@ const roundsData = {
       },
       {
         "1": "Maleficent",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Evil Queen",
-        "2": "Madame Mim"
-      },
-      {
-        "1": "Hades",
         "2": "Syndrome"
       },
       {
-        "1": "Scar",
+        "1": "Evil Queen",
         "2": "Gaston"
       },
       {
-        "1": "Pete",
+        "1": "Cruella",
         "2": "Captain Hook"
       },
       {
-        "1": "Ursula",
+        "1": "Madame Mim",
         "2": "Queen of Hearts"
       },
       {
-        "1": "Yzma",
+        "1": "Hades",
         "2": "Ratigan"
+      },
+      {
+        "1": "Scar",
+        "2": "Yzma"
+      },
+      {
+        "1": "Pete",
+        "2": "Ursula"
       }
     ],
     [
       {
-        "1": "Ratigan",
-        "2": "Cruella"
-      },
-      {
-        "1": "Queen of Hearts",
-        "2": "Yzma"
-      },
-      {
-        "1": "Captain Hook",
-        "2": "Ursula"
-      },
-      {
-        "1": "Gaston",
+        "1": "Yzma",
         "2": "Pete"
       },
       {
-        "1": "Syndrome",
+        "1": "Ratigan",
         "2": "Scar"
       },
       {
-        "1": "Madame Mim",
+        "1": "Queen of Hearts",
         "2": "Hades"
       },
       {
-        "1": "Oogie Boogie",
+        "1": "Captain Hook",
+        "2": "Madame Mim"
+      },
+      {
+        "1": "Gaston",
+        "2": "Cruella"
+      },
+      {
+        "1": "Syndrome",
         "2": "Evil Queen"
       },
       {
@@ -528,10 +400,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Cruella",
-        "2": "Prince John"
-      },
-      {
         "1": "Dr. Facilier",
         "2": "Mother Gothel"
       },
@@ -548,58 +416,54 @@ const roundsData = {
         "2": "Lotso"
       },
       {
-        "1": "Hades",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Scar",
-        "2": "Madame Mim"
-      },
-      {
-        "1": "Pete",
+        "1": "Cruella",
         "2": "Syndrome"
       },
       {
-        "1": "Ursula",
+        "1": "Madame Mim",
         "2": "Gaston"
       },
       {
-        "1": "Yzma",
+        "1": "Hades",
         "2": "Captain Hook"
       },
       {
-        "1": "Ratigan",
+        "1": "Scar",
         "2": "Queen of Hearts"
+      },
+      {
+        "1": "Pete",
+        "2": "Ratigan"
+      },
+      {
+        "1": "Ursula",
+        "2": "Yzma"
       }
     ],
     [
       {
-        "1": "Queen of Hearts",
-        "2": "Cruella"
-      },
-      {
-        "1": "Captain Hook",
-        "2": "Ratigan"
-      },
-      {
-        "1": "Gaston",
-        "2": "Yzma"
-      },
-      {
-        "1": "Syndrome",
+        "1": "Ratigan",
         "2": "Ursula"
       },
       {
-        "1": "Madame Mim",
+        "1": "Queen of Hearts",
         "2": "Pete"
       },
       {
-        "1": "Oogie Boogie",
+        "1": "Captain Hook",
         "2": "Scar"
       },
       {
-        "1": "Lotso",
+        "1": "Gaston",
         "2": "Hades"
+      },
+      {
+        "1": "Syndrome",
+        "2": "Madame Mim"
+      },
+      {
+        "1": "Lotso",
+        "2": "Cruella"
       },
       {
         "1": "Lady Tremaine",
@@ -620,10 +484,6 @@ const roundsData = {
     ],
     [
       {
-        "1": "Cruella",
-        "2": "Dr. Facilier"
-      },
-      {
         "1": "Jafar",
         "2": "Prince John"
       },
@@ -636,66 +496,62 @@ const roundsData = {
         "2": "Horned King"
       },
       {
-        "1": "Hades",
+        "1": "Cruella",
         "2": "Lady Tremaine"
       },
       {
-        "1": "Scar",
+        "1": "Madame Mim",
         "2": "Lotso"
       },
       {
-        "1": "Pete",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Ursula",
-        "2": "Madame Mim"
-      },
-      {
-        "1": "Yzma",
+        "1": "Hades",
         "2": "Syndrome"
       },
       {
-        "1": "Ratigan",
+        "1": "Scar",
         "2": "Gaston"
       },
       {
-        "1": "Queen of Hearts",
+        "1": "Pete",
         "2": "Captain Hook"
+      },
+      {
+        "1": "Ursula",
+        "2": "Queen of Hearts"
+      },
+      {
+        "1": "Yzma",
+        "2": "Ratigan"
       }
     ],
     [
       {
-        "1": "Captain Hook",
-        "2": "Cruella"
-      },
-      {
-        "1": "Gaston",
-        "2": "Queen of Hearts"
-      },
-      {
-        "1": "Syndrome",
-        "2": "Ratigan"
-      },
-      {
-        "1": "Madame Mim",
+        "1": "Queen of Hearts",
         "2": "Yzma"
       },
       {
-        "1": "Oogie Boogie",
+        "1": "Captain Hook",
         "2": "Ursula"
       },
       {
-        "1": "Lotso",
+        "1": "Gaston",
         "2": "Pete"
       },
       {
-        "1": "Lady Tremaine",
+        "1": "Syndrome",
         "2": "Scar"
       },
       {
-        "1": "Horned King",
+        "1": "Lotso",
         "2": "Hades"
+      },
+      {
+        "1": "Lady Tremaine",
+        "2": "Madame Mim"
+      },
+      {
+        "1": "Horned King",
+        "2": "Cruella"
       },
       {
         "1": "Mother Gothel",
@@ -712,15 +568,99 @@ const roundsData = {
     ],
     [
       {
-        "1": "Cruella",
-        "2": "Jafar"
-      },
-      {
         "1": "Maleficent",
         "2": "Dr. Facilier"
       },
       {
         "1": "Evil Queen",
+        "2": "Prince John"
+      },
+      {
+        "1": "Cruella",
+        "2": "Mother Gothel"
+      },
+      {
+        "1": "Madame Mim",
+        "2": "Horned King"
+      },
+      {
+        "1": "Hades",
+        "2": "Lady Tremaine"
+      },
+      {
+        "1": "Scar",
+        "2": "Lotso"
+      },
+      {
+        "1": "Pete",
+        "2": "Syndrome"
+      },
+      {
+        "1": "Ursula",
+        "2": "Gaston"
+      },
+      {
+        "1": "Yzma",
+        "2": "Captain Hook"
+      },
+      {
+        "1": "Ratigan",
+        "2": "Queen of Hearts"
+      }
+    ],
+    [
+      {
+        "1": "Captain Hook",
+        "2": "Ratigan"
+      },
+      {
+        "1": "Gaston",
+        "2": "Yzma"
+      },
+      {
+        "1": "Syndrome",
+        "2": "Ursula"
+      },
+      {
+        "1": "Lotso",
+        "2": "Pete"
+      },
+      {
+        "1": "Lady Tremaine",
+        "2": "Scar"
+      },
+      {
+        "1": "Horned King",
+        "2": "Hades"
+      },
+      {
+        "1": "Mother Gothel",
+        "2": "Madame Mim"
+      },
+      {
+        "1": "Prince John",
+        "2": "Cruella"
+      },
+      {
+        "1": "Dr. Facilier",
+        "2": "Evil Queen"
+      },
+      {
+        "1": "Jafar",
+        "2": "Maleficent"
+      }
+    ],
+    [
+      {
+        "1": "Evil Queen",
+        "2": "Jafar"
+      },
+      {
+        "1": "Cruella",
+        "2": "Dr. Facilier"
+      },
+      {
+        "1": "Madame Mim",
         "2": "Prince John"
       },
       {
@@ -741,36 +681,24 @@ const roundsData = {
       },
       {
         "1": "Yzma",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Ratigan",
-        "2": "Madame Mim"
-      },
-      {
-        "1": "Queen of Hearts",
         "2": "Syndrome"
       },
       {
-        "1": "Captain Hook",
+        "1": "Ratigan",
         "2": "Gaston"
+      },
+      {
+        "1": "Queen of Hearts",
+        "2": "Captain Hook"
       }
     ],
     [
       {
         "1": "Gaston",
-        "2": "Cruella"
-      },
-      {
-        "1": "Syndrome",
-        "2": "Captain Hook"
-      },
-      {
-        "1": "Madame Mim",
         "2": "Queen of Hearts"
       },
       {
-        "1": "Oogie Boogie",
+        "1": "Syndrome",
         "2": "Ratigan"
       },
       {
@@ -795,11 +723,15 @@ const roundsData = {
       },
       {
         "1": "Dr. Facilier",
-        "2": "Evil Queen"
+        "2": "Madame Mim"
       },
       {
         "1": "Jafar",
-        "2": "Maleficent"
+        "2": "Cruella"
+      },
+      {
+        "1": "Maleficent",
+        "2": "Evil Queen"
       }
     ],
     [
@@ -808,7 +740,7 @@ const roundsData = {
         "2": "Maleficent"
       },
       {
-        "1": "Evil Queen",
+        "1": "Madame Mim",
         "2": "Jafar"
       },
       {
@@ -837,28 +769,16 @@ const roundsData = {
       },
       {
         "1": "Queen of Hearts",
-        "2": "Oogie Boogie"
+        "2": "Syndrome"
       },
       {
         "1": "Captain Hook",
-        "2": "Madame Mim"
-      },
-      {
-        "1": "Gaston",
-        "2": "Syndrome"
+        "2": "Gaston"
       }
     ],
     [
       {
         "1": "Syndrome",
-        "2": "Cruella"
-      },
-      {
-        "1": "Madame Mim",
-        "2": "Gaston"
-      },
-      {
-        "1": "Oogie Boogie",
         "2": "Captain Hook"
       },
       {
@@ -891,12 +811,16 @@ const roundsData = {
       },
       {
         "1": "Maleficent",
-        "2": "Evil Queen"
+        "2": "Madame Mim"
+      },
+      {
+        "1": "Evil Queen",
+        "2": "Cruella"
       }
     ],
     [
       {
-        "1": "Cruella",
+        "1": "Madame Mim",
         "2": "Evil Queen"
       },
       {
@@ -933,22 +857,10 @@ const roundsData = {
       },
       {
         "1": "Gaston",
-        "2": "Oogie Boogie"
-      },
-      {
-        "1": "Syndrome",
-        "2": "Madame Mim"
+        "2": "Syndrome"
       }
     ],
     [
-      {
-        "1": "Madame Mim",
-        "2": "Cruella"
-      },
-      {
-        "1": "Oogie Boogie",
-        "2": "Syndrome"
-      },
       {
         "1": "Lotso",
         "2": "Gaston"
@@ -984,6 +896,10 @@ const roundsData = {
       {
         "1": "Evil Queen",
         "2": "Hades"
+      },
+      {
+        "1": "Cruella",
+        "2": "Madame Mim"
       }
     ]
   ]
