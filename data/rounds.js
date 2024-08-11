@@ -60,6 +60,10 @@ const roundsData = {
       {
         "1": "Syndrome",
         "2": "Lotso"
+      },
+      {
+        "1": "Madame Mim",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -102,6 +106,10 @@ const roundsData = {
       {
         "1": "Madame Mim",
         "2": "Hades"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Lotso"
       }
     ],
     [
@@ -144,6 +152,10 @@ const roundsData = {
       {
         "1": "Lotso",
         "2": "Lady Tremaine"
+      },
+      {
+        "1": "Hades",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -186,6 +198,10 @@ const roundsData = {
       {
         "1": "Hades",
         "2": "Scar"
+      },
+      {
+        "1": "Lady Tremaine",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -228,6 +244,10 @@ const roundsData = {
       {
         "1": "Lady Tremaine",
         "2": "Horned King"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Scar"
       }
     ],
     [
@@ -270,6 +290,10 @@ const roundsData = {
       {
         "1": "Scar",
         "2": "Pete"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Horned King"
       }
     ],
     [
@@ -312,6 +336,10 @@ const roundsData = {
       {
         "1": "Horned King",
         "2": "Mother Gothel"
+      },
+      {
+        "1": "Pete",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -354,6 +382,10 @@ const roundsData = {
       {
         "1": "Pete",
         "2": "Ursula"
+      },
+      {
+        "1": "Mother Gothel",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -396,6 +428,10 @@ const roundsData = {
       {
         "1": "Mother Gothel",
         "2": "Prince John"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Ursula"
       }
     ],
     [
@@ -438,6 +474,10 @@ const roundsData = {
       {
         "1": "Ursula",
         "2": "Yzma"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Prince John"
       }
     ],
     [
@@ -480,6 +520,10 @@ const roundsData = {
       {
         "1": "Prince John",
         "2": "Dr. Facilier"
+      },
+      {
+        "1": "Yzma",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -522,6 +566,10 @@ const roundsData = {
       {
         "1": "Yzma",
         "2": "Ratigan"
+      },
+      {
+        "1": "Dr. Facilier",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -564,6 +612,10 @@ const roundsData = {
       {
         "1": "Dr. Facilier",
         "2": "Jafar"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Ratigan"
       }
     ],
     [
@@ -606,6 +658,10 @@ const roundsData = {
       {
         "1": "Ratigan",
         "2": "Queen of Hearts"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Jafar"
       }
     ],
     [
@@ -648,6 +704,10 @@ const roundsData = {
       {
         "1": "Jafar",
         "2": "Maleficent"
+      },
+      {
+        "1": "Queen of Hearts",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -690,6 +750,10 @@ const roundsData = {
       {
         "1": "Queen of Hearts",
         "2": "Captain Hook"
+      },
+      {
+        "1": "Maleficent",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -732,6 +796,10 @@ const roundsData = {
       {
         "1": "Maleficent",
         "2": "Evil Queen"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Captain Hook"
       }
     ],
     [
@@ -774,6 +842,10 @@ const roundsData = {
       {
         "1": "Captain Hook",
         "2": "Gaston"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Evil Queen"
       }
     ],
     [
@@ -816,6 +888,10 @@ const roundsData = {
       {
         "1": "Evil Queen",
         "2": "Cruella"
+      },
+      {
+        "1": "Gaston",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -858,6 +934,10 @@ const roundsData = {
       {
         "1": "Gaston",
         "2": "Syndrome"
+      },
+      {
+        "1": "Cruella",
+        "2": "Oogie Boogie"
       }
     ],
     [
@@ -900,6 +980,10 @@ const roundsData = {
       {
         "1": "Cruella",
         "2": "Madame Mim"
+      },
+      {
+        "1": "Oogie Boogie",
+        "2": "Syndrome"
       }
     ]
   ]
