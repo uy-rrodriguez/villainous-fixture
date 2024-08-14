@@ -41,6 +41,7 @@ resultsData = [
   ["Evil Queen",      2,  "Pete",             1],
   ["Cruella",         1,  "Scar",             2],
   ["Madame Mim",      2,  "Hades",            0],
+  ["Oogie Boogie",    2,  "Lotso",            1],
 
   // Round 3
   ["Ursula",          1,  "Evil Queen",       2],
