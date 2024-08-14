@@ -635,31 +635,35 @@ function drawFixtureHtml(fixture) {
  * @param {Fixture} fixture
  */
 function drawStandingsHtml(fixture) {
-    const points = new Map();
     const wins = new Map();
     const losses = new Map();
+    const victories = new Map();
+    const defeats = new Map();
     fixture.rounds.forEach((round, round_idx) => {
         round.forEach((pair, pair_idx) => {
             // Count only played matches
             if (pair.score1 || pair.score2) {
-                points.set(pair.item1, (points.get(pair.item1) ?? 0) + pair.score1);
-                points.set(pair.item2, (points.get(pair.item2) ?? 0) + pair.score2);
+                wins.set(pair.item1, (wins.get(pair.item1) ?? 0) + pair.score1);
+                wins.set(pair.item2, (wins.get(pair.item2) ?? 0) + pair.score2);
+                losses.set(pair.item1, (losses.get(pair.item1) ?? 0) + pair.score2);
+                losses.set(pair.item2, (losses.get(pair.item2) ?? 0) + pair.score1);
                 if (pair.winner) {
-                    wins.set(pair.winner, (wins.get(pair.winner) ?? 0) + 1);
+                    victories.set(pair.winner, (victories.get(pair.winner) ?? 0) + 1);
                     const loser = (pair.winner === pair.item1) ? pair.item2 : pair.item1;
-                    losses.set(loser, (losses.get(loser) ?? 0) + 1);
+                    defeats.set(loser, (defeats.get(loser) ?? 0) + 1);
                 }
             }
         });
     });
 
-    const sortCoef = a => 2 * a.points + a.wins - a.losses;
-    const standings = Array.from(points)
+    const sortCoef = a => 2 * a.wins + a.victories - a.defeats - a.losses;
+    const standings = Array.from(wins)
         .map(([k, v]) => ({
             villain: k,
-            points: v,
-            wins: wins.get(k) ?? 0,
+            wins: v,
             losses: losses.get(k) ?? 0,
+            victories: victories.get(k) ?? 0,
+            defeats: defeats.get(k) ?? 0,
         }))
         .sort((a, b) => sortCoef(b) - sortCoef(a));
     //console.debug(standings);
@@ -694,9 +698,9 @@ function drawStandingsHtml(fixture) {
                 </div>
             </div>
             <div class="results">
-                ${data.points} P &nbsp;&nbsp;
-                ${data.wins} W &nbsp;&nbsp;
-                ${data.losses} L
+                ${data.wins} 🏆 &nbsp;&nbsp;
+                ${data.victories} 🥇 &nbsp;&nbsp;
+                ${data.defeats} 🥈 &nbsp;&nbsp;
             </div>`;
 
         if (isLast) {
@@ -709,7 +713,19 @@ function drawStandingsHtml(fixture) {
         container.appendChild(item);
     }
 
-    document.getElementById("standings-container").appendChild(container);
+    const standingsElem = document.getElementById("standings-container");
+    standingsElem.appendChild(container);
+
+    // Add button to toggle standings
+    const toggleWrapper = document.createElement("div");
+    toggleWrapper.id = "standings-toggle-wrapper";
+    const toggle = document.createElement("button");
+    toggleWrapper.appendChild(toggle);
+    toggle.textContent = "🏆";
+    toggle.onclick = () => {
+        toggleWrapper.classList.toggle("active");
+    };
+    standingsElem.parentNode.insertBefore(toggleWrapper, standingsElem);
 }
 
 /**

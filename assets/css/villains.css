@@ -105,8 +105,40 @@ body {
 /*
  * STANDINGS
  */
+#standings-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1rem;
+}
+
+#standings-toggle-wrapper > button {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    font-size: 3rem;
+    border: none;
+    filter: grayscale(1);
+    transition: filter .2s ease;
+}
+
+#standings-toggle-wrapper > button:hover {
+    filter: grayscale(.6);
+}
+
+#standings-toggle-wrapper.active > button {
+    filter: grayscale(0);
+}
+
 #standings-container {
     position: fixed;
+    left: -160px;
+    transition: left .2s ease;
+}
+
+#standings-toggle-wrapper.active + #standings-container {
     left: 0;
 }
 
