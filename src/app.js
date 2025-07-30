@@ -613,6 +613,7 @@ function drawFixtureHtml(fixture) {
                 `<div class="villain villain-left ${resultClass1} col-xs-5">
                     <div class="villain-img-wrapper">
                         <img class="villain-img" src="assets/img/${pair.item1.image}" />
+                        <span class="villain-name">${pair.item1.name}</span>
                     </div>
                 </div>
                 <div class="col-xs-2 text-center villain-vs-wrapper">
@@ -621,6 +622,7 @@ function drawFixtureHtml(fixture) {
                 <div class="villain villain-right ${resultClass2} col-xs-5">
                     <div class="villain-img-wrapper">
                         <img class="villain-img" src="assets/img/${pair.item2.image}" />
+                        <span class="villain-name">${pair.item2.name}</span>
                     </div>
                 </div>`;
         });

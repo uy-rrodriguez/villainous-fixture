@@ -315,3 +315,19 @@ body {
 .villain-score {
     font-size: 3rem;
 }
+
+
+/* Show villain name to help during tests */
+.villain-name {
+    display: none;  /* Comment this out to display name */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.5;
+}
+
+.villain-lost .villain-name {
+    opacity: 1;
+}
