@@ -358,6 +358,92 @@ function getRoundsBerger(villains) {
 }
 
 /**
+ * Generates a list of Rounds following the Simple Round Robin algorithm.
+ *
+ * @param {Villain[]} villains
+ * @returns {Round[]}
+ * @see https://en.wikipedia.org/wiki/Round-robin_tournament
+ */
+function getRoundsRobin(villains) {
+    console.debug('getRoundsRobin');
+    let rows = [];  // Rounds but only with the item ids
+    let rounds = [];
+    let n = villains.length;
+    let dummy = null;
+
+    // List of all item ids
+    let ids = []
+    for (let i = 0; i < n; i++) {
+        ids.push(i);
+    }
+
+    // Add dummy element at position 1 if number is odd
+    if (n % 2 > 0) {
+        console.debug(`Odd number of elements (${n}). Creating dummy.`);
+        dummy = "d";
+        n = n+1;
+        // Place dummy at the beginning, in the non-rotating slot
+        // (i.e. invert first two positions)
+        ids.push(ids.shift());
+        ids.unshift(dummy);
+        // ids.push(dummy);
+    }
+
+    // First round pairs 1<->n, 2<->(n-1), 3<->(n-2), etc.
+    let row = [];
+    for (let i = 0; i < n / 2; i++) {
+        row.push(ids[i]);
+        row.push(ids[n-1-i]);
+    }
+    console.debug(`Round 1, row: ${row}`);
+    rows.push(row);
+
+    // Following n-2 rounds fix item 1 and rotate the rest, shifting them one
+    // position forward. Last item moves to position 2 in the array.
+    //
+    for (let r = 1; r < n-1; r++) {
+        const prevIds = ids;
+        ids = [prevIds[0], prevIds[n-1]];
+        for (let i = 1; i < n-1; i++) {
+            ids.push(prevIds[i]);
+        }
+
+        row = []
+        for (let i = 0; i < n / 2; i++) {
+            row.push(ids[i]);
+            row.push(ids[n-1-i]);
+        }
+        console.debug(`Round ${r+1}, row: ${row}`);
+        rows.push(row);
+    }
+
+    // Generate Rounds of Pairs
+    // The position of item 1 is inverted for each odd row to make it go second.
+    //
+    for (let r = 0; r < n-1; r++) {
+        const pairs = [];
+        for (let i = 0; i < n-1; i+=2) {
+            const idx1 = rows[r][i];
+            const idx2 = rows[r][i+1];
+
+            // Ignore pair if it contains the dummy
+            if (idx1 !== dummy && idx2 !== dummy) {
+                if (r % 2 > 0) {
+                    pairs.push(new Pair(villains[idx2], villains[idx1]));
+                }
+                else{
+                    pairs.push(new Pair(villains[idx1], villains[idx2]));
+                }
+            }
+        }
+        rounds.push(new Round(pairs));
+    }
+
+    // console.debug(rounds);
+    return rounds;
+}
+
+/**
  * Adds the missing pairs from every round of roundsB into roundsA.
  *
  * Since the distribution of pairs in the rounds might differ,
@@ -391,7 +477,7 @@ function mergeRounds(a, b) {
         let validPairs = newPairs
             .filter((bp) =>
                 ! round.pairs.some((ap) => ap.intersects(bp)));
-    
+
         // Add pairs to A
         validPairs = validPairs.splice(0, Math.min(diff, validPairs.length));
         validPairs.forEach((bp) => round.push(bp));
@@ -421,7 +507,8 @@ function mergeRounds(a, b) {
  * @returns {Fixture}
  */
 function generateFixture(villains, results, fixtureToUpdate = null) {
-    let rounds = getRoundsBerger(villains);
+    // let rounds = getRoundsBerger(villains);
+    let rounds = getRoundsRobin(villains);
     let currentRound = 1;
     if (fixtureToUpdate != null) {
         rounds = mergeRounds(fixtureToUpdate.rounds, rounds);
@@ -469,7 +556,7 @@ function fixtureToJson(fixture) {
     fixture.rounds.forEach(round => {
         const simpleRound = [];
         round.forEach(pair => {
-            console.debug(pair);
+            // console.debug(pair);
             simpleRound.push({
                 1: pair.item1.name,
                 2: pair.item2.name,
@@ -741,14 +828,14 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);
 
     // A) Either load fixture from rounds data
-    const fixture = loadFixture(villains, roundsData, resultsData);
+    // const fixture = loadFixture(villains, roundsData, resultsData);
     // B) or Generate new fixture from villains data
-    //const fixture = generateFixture(villains, resultsData);
-    //console.log(fixtureToJson(fixture));
+    const fixture = generateFixture(villains, resultsData);
     // C) or Updtate existing fixture with new villains data
-    //const oldFixture = loadFixture(villains, roundsData, []);
-    //const fixture = generateFixture(villains, resultsData, oldFixture);
-    //console.log(fixtureToJson(fixture));
+    // const oldFixture = loadFixture(villains, roundsData, []);
+    // const fixture = generateFixture(villains, resultsData, oldFixture);
+
+    // console.log(fixtureToJson(fixture));
 
     // Draw fixture as HTML
     drawFixtureHtml(fixture);
