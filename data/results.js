@@ -29,6 +29,8 @@ resultsData = [
   ["Gaston",          1,  "Lady Tremaine",    2],
   ["Syndrome",        1,  "Lotso",            2],
   ["Madame Mim",      0,  "Oogie Boogie",     2],
+  
+  ["Scar",            1,  "Shere Khan",       2],
 
   // Round 2
   ["Lady Tremaine",   2,  "Syndrome",         1],
