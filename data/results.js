@@ -17,43 +17,82 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 resultsData = [
-  // Round 1
+
+  // Hades
   ["Hades",           2,  "Cruella",          0],
-  ["Scar",            1,  "Evil Queen",       2],
-  ["Pete",            2,  "Maleficent",       1],
-  ["Ursula",          2,  "Jafar",            1],
-  ["Yzma",            2,  "Dr. Facilier",     1],
-  ["Ratigan",         2,  "Prince John",      1],
-  ["Queen of Hearts", 2,  "Mother Gothel",    1],
-  ["Captain Hook",    2,  "Horned King",      1],
-  ["Gaston",          1,  "Lady Tremaine",    2],
-  ["Syndrome",        1,  "Lotso",            2],
-  ["Madame Mim",      0,  "Oogie Boogie",     2],
-  
-  ["Scar",            1,  "Shere Khan",       2],
-
-  // Round 2
-  ["Lady Tremaine",   2,  "Syndrome",         1],
-  ["Horned King",     2,  "Gaston",           1],
-  ["Mother Gothel",   2,  "Captain Hook",     1],
-  ["Prince John",     0,  "Queen of Hearts",  2],
-  ["Dr. Facilier",    2,  "Ratigan",          1],
-  ["Jafar",           1,  "Yzma",             2],
-  ["Maleficent",      2,  "Ursula",           1],
-  ["Evil Queen",      2,  "Pete",             1],
-  ["Cruella",         1,  "Scar",             2],
-  ["Madame Mim",      2,  "Hades",            0],
-  ["Oogie Boogie",    2,  "Lotso",            1],
-
-  // Round 3
-  ["Ursula",          1,  "Evil Queen",       2],
-  ["Queen of Hearts", 2,  "Dr. Facilier",     1],
-  ["Prince John",     1,  "Captain Hook",     2],
-  ["Ratigan",         2,  "Jafar",            1],
-
-  // Round 4
   ["Hades",           2,  "Scar",             1],
 
-  // Round 5
+  // Scar
+  ["Scar",            1,  "Evil Queen",       2],
+  ["Scar",            1,  "Shere Khan",       2],
+
+  // Pete
+  ["Pete",            2,  "Maleficent",       1],
+
+  // Ursula
+  ["Ursula",          2,  "Jafar",            1],
+  ["Ursula",          1,  "Evil Queen",       2],
+
+  // Yzma
+  ["Yzma",            2,  "Dr. Facilier",     1],
+
+  // Ratigan
+  ["Ratigan",         2,  "Prince John",      1],
+  ["Ratigan",         2,  "Jafar",            1],
+
+  // Queen of Hearts
+  ["Queen of Hearts", 2,  "Mother Gothel",    1],
+  ["Queen of Hearts", 2,  "Dr. Facilier",     1],
+
+  // Captain Hook
+  ["Captain Hook",    2,  "Horned King",      1],
+
+  // Gaston
+  ["Gaston",          1,  "Lady Tremaine",    2],
+
+  // Syndrome
+  ["Syndrome",        1,  "Lotso",            2],
+
+  // Madame Mim
+  ["Madame Mim",      2,  "Hades",            0],
+  ["Madame Mim",      0,  "Oogie Boogie",     2],
+
+  // Lotso
+
+  // Lady Tremaine
+  ["Lady Tremaine",   2,  "Syndrome",         1],
+
+  // Horned King
+  ["Horned King",     2,  "Gaston",           1],
+
+  // Mother Gothel
+  ["Mother Gothel",   2,  "Captain Hook",     1],
+
+  // Prince John
+  ["Prince John",     0,  "Queen of Hearts",  2],
+  ["Prince John",     1,  "Captain Hook",     2],
+
+  // Dr. Facilier
+  ["Dr. Facilier",    2,  "Ratigan",          1],
+
+  // Jafar
+  ["Jafar",           1,  "Yzma",             2],
+
+  // Maleficent
+  ["Maleficent",      2,  "Ursula",           1],
+
+  // Evil Queen
+  ["Evil Queen",      2,  "Pete",             1],
+
+  // Cruella
+  ["Cruella",         1,  "Scar",             2],
+
+  // Oogie Boogie
+  ["Oogie Boogie",    2,  "Lotso",            1],
   ["Oogie Boogie",    2,  "Scar",             1],
+
+  // Shere Khan
+
+  // King Candy
+
 ];
