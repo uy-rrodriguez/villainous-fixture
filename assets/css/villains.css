@@ -122,30 +122,38 @@ body {
     top: 0;
     bottom: 0;
     left: 1rem;
+    transition: margin .5s ease;
 }
 
 #standings-toggle-wrapper > button {
     background: transparent;
-    margin: 0;
+    margin: 0 0 0 -1px;
     padding: 0;
     font-size: 3rem;
     border: none;
     filter: grayscale(1);
-    transition: filter .2s ease;
+    transition: filter,transform .2s ease;  /*, box-shadow .5s ease;*/
 }
 
 #standings-toggle-wrapper > button:hover {
-    filter: grayscale(.6);
+    filter: grayscale(0);
+    transform: scale(1.1);
 }
 
 #standings-toggle-wrapper.active > button {
     filter: grayscale(0);
+    transform: scale(1.5);
+    /* box-shadow: 0px 1.6rem 0.8rem -1rem #ffb900; */
 }
 
 #standings-container {
     position: fixed;
     left: -160px;
     transition: left .2s ease;
+}
+
+#standings-toggle-wrapper.active {
+    margin-left: 46px;
 }
 
 #standings-toggle-wrapper.active + #standings-container {
@@ -186,7 +194,7 @@ body {
 
 .standings-first .villain .villain-img-wrapper {
     border: 5px solid orange;
-    border-radius: 10px;
+    border-radius: 1.5rem;
 }
 
 .standings-item.standings-first .villain-img {
