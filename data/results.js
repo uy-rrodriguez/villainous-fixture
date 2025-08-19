@@ -21,6 +21,7 @@ resultsData = [
   // Hades
   ["Hades",           2,  "Cruella",          0],
   ["Hades",           2,  "Scar",             1],
+  ["Hades",           1,  "King Candy",       2],
 
   // Scar
   ["Scar",            1,  "Evil Queen",       2],
