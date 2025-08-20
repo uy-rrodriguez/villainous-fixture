@@ -757,8 +757,13 @@ function drawStandingsHtml(fixture) {
         .sort((a, b) => sortCoef(b) - sortCoef(a));
     //console.debug(standings);
 
-    const container = document.createElement("div");
-    container.classList.add("standings");
+    const standingsElem = document.getElementById("standings-container");
+
+    const mainContainer = document.createElement("div");
+    mainContainer.classList.add("standings");
+
+    const interContainer = document.createElement("div");
+    interContainer.classList.add("intermediate");
 
     // Title
     // const title = document.createElement("div");
@@ -767,10 +772,16 @@ function drawStandingsHtml(fixture) {
     // container.appendChild(title);
 
     // Villains in top 3 and last position
-    for (let i of [0, 1, 2, standings.length - 1]) {
+    // for (let i of [0, 1, 2, standings.length - 1]) {
+    for (let i = 0; i < standings.length; i++) {
         const data = standings[i];
         const isFirst = sortCoef(data) === sortCoef(standings[0]);
         const isLast = i === standings.length - 1;
+
+        // Add container for villains at intermediate positions
+        if (i === 3) {
+            mainContainer.appendChild(interContainer);
+        }
 
         const item = document.createElement("div");
         item.classList.add("standings-item");
@@ -781,29 +792,51 @@ function drawStandingsHtml(fixture) {
         }
 
         item.innerHTML =
-            `<div class="villain ${isLast ? 'villain-lost' : ''}">
+            `<div class="pos">${i+1}</div>
+            <div class="villain ${isLast ? 'villain-lost' : ''}">
                 <div class="villain-img-wrapper">
                     <img class="villain-img" src="assets/img/${data.villain.image}" />
                 </div>
             </div>
             <div class="results">
-                ${data.wins} 🏆 &nbsp;&nbsp;
-                ${data.victories} 🥇 &nbsp;&nbsp;
-                ${data.defeats} 🥈 &nbsp;&nbsp;
+                <span class="victories" title="Victories">${data.victories} 🏆</span>
+                <span class="wins" title="Wins">${data.wins} 🥇</span>
+                <span class="losses" title="Losses">${data.losses} 🥈</span>
             </div>`;
 
         if (isLast) {
             const filler = document.createElement("div");
             filler.classList.add("standings-before-last");
             filler.textContent = "...";
-            container.appendChild(filler);
+            filler.title = "Show all";
+            filler.onclick = () => {
+                interContainer.classList.toggle("shown");
+                standingsElem.classList.toggle("with-intermediate");
+                filler.classList.toggle("with-intermediate");
+                if (interContainer.classList.contains("shown")) {
+                    interContainer.style.height =
+                        `${interContainer.dataset.height}px`;
+                    filler.textContent = "^";
+                    filler.title = "Hide";
+                } else {
+                    interContainer.style.height = 0;
+                    filler.textContent = "...";
+                    filler.title = "Show all";
+                }
+            };
+            mainContainer.appendChild(filler);
         }
 
-        container.appendChild(item);
+        if (i > 2 && i < standings.length - 1) {
+            interContainer.appendChild(item);
+        }
+        else {
+            mainContainer.appendChild(item);
+        }
     }
 
-    const standingsElem = document.getElementById("standings-container");
-    standingsElem.appendChild(container);
+    // Add standings to wrapping container
+    standingsElem.appendChild(mainContainer);
 
     // Add button to toggle standings
     const toggleWrapper = document.createElement("div");
@@ -815,6 +848,10 @@ function drawStandingsHtml(fixture) {
         toggleWrapper.classList.toggle("active");
     };
     standingsElem.parentNode.insertBefore(toggleWrapper, standingsElem);
+
+    // Calculate total height of intermediate container (for animation)
+    interContainer.dataset.height = interContainer.offsetHeight;
+    interContainer.style.height = 0;
 }
 
 /**
@@ -828,9 +865,9 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const villains = loadVillains(villainsData);
 
     // A) Either load fixture from rounds data
-    // const fixture = loadFixture(villains, roundsData, resultsData);
+    const fixture = loadFixture(villains, roundsData, resultsData);
     // B) or Generate new fixture from villains data
-    const fixture = generateFixture(villains, resultsData);
+    // const fixture = generateFixture(villains, resultsData);
     // C) or Updtate existing fixture with new villains data
     // const oldFixture = loadFixture(villains, roundsData, []);
     // const fixture = generateFixture(villains, resultsData, oldFixture);

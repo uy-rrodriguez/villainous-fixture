@@ -140,24 +140,43 @@ body {
     transform: scale(1.1);
 }
 
+#standings-toggle-wrapper.active {
+    margin-left: 57px;
+}
+
 #standings-toggle-wrapper.active > button {
     filter: grayscale(0);
     transform: scale(1.5);
     /* box-shadow: 0px 1.6rem 0.8rem -1rem #ffb900; */
 }
 
-#standings-container {
-    position: fixed;
-    left: -160px;
-    transition: left .2s ease;
-}
-
-#standings-toggle-wrapper.active {
-    margin-left: 46px;
+.header.shrink ~ #standings-toggle-wrapper.active > button {
+    transform: scale(1.2);
 }
 
 #standings-toggle-wrapper.active + #standings-container {
     left: 0;
+}
+
+#standings-container {
+    position: fixed;
+    top: 88px;
+    bottom: 0;
+    left: -160px;
+
+    background-color: #5b52a1;
+    border: 3px solid var(--top-border-color);
+    border-width: 0 3px 3px 0;
+    border-bottom-right-radius: 16px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+
+    transition: left .2s ease, top .3s ease;
+}
+
+.header.shrink ~ #standings-container {
+    top: 46px;
 }
 
 .standings {
@@ -165,11 +184,8 @@ body {
     flex-direction: column;
     align-items: center;
 
-    padding: 1rem;
-    background-color: #5b52a1;
-    border: 3px solid var(--bg-color);
-    border-width: 0 3px 3px 0;
-    border-bottom-right-radius: 16px;
+    padding-left: 3rem;
+    padding-right: 1.5rem;
 }
 
 .standings-title {
@@ -178,52 +194,100 @@ body {
     line-height: 1;
 }
 
+.standings .intermediate {
+    opacity: 0;
+    transition: all .5s ease;
+}
+
+.standings .intermediate:not(.shown) {
+    overflow-y: hidden;
+}
+
+.standings .intermediate.shown {
+    opacity: 1;
+}
+
 .standings-item {
+    position: relative;
 }
 
-.standings-item .results {
-    margin-bottom: 2rem;
-    font-size: 1rem;
-    text-align: center;
-}
-
-.standings-item.standings-first .results {
-    font-size: 1.2rem;
+.standings-item .pos {
+    position: absolute;
+    margin-left: -2.2rem;
+    top: 4rem;
+    font-size: 1.8rem;
     font-weight: bold;
+    color: rgba(250, 250, 250, .4);
 }
 
-.standings-first .villain .villain-img-wrapper {
-    border: 5px solid orange;
+.standings-item .villain-img-wrapper {
+    border: 5px solid transparent;
     border-radius: 1.5rem;
 }
 
-.standings-item.standings-first .villain-img {
+.standings-item .results {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.standings > :last-child .results {
+    margin-bottom: 0;
+}
+
+.standings-item.standings-first .results {
+    font-weight: bold;
+}
+
+.standings-item.standings-first .villain-img-wrapper {
+    border-color: orange;
+}
+
+.standings-item .villain-img,
+.standings-item .villain-lost .villain-img {
+    width: 10rem;
+    height: 10rem;
+}
+
+/* .standings-item.standings-first .villain-img {
     width: 12rem;
     height: 12rem;
-}
+} */
 
-.standings-item:not(.standings-first) .villain-img {
+/* .standings-item:not(.standings-first) .villain-img {
     width: 10rem;
     height: 10rem;
-}
+} */
 
-.standings-item:not(.standings-first) .villain:before {
+.standings-item .villain.villain-lost:before {
     width: 10rem;
     height: 10rem;
+    margin: 5px;  /* To adjust position because of the img border */
 }
 
 .standings-last {
 }
 
 .standings-before-last {
-    margin-left: 4rem;
+    margin-left: 3rem;
     margin-bottom: 2rem;
     font-family: serif;
-    font-size: 8rem;
+    font-size: 6rem;
     line-height: 0;
     color: var(--bg-color);
     writing-mode: vertical-lr;
     user-select: none;
+    cursor: pointer;
+}
+
+.standings-before-last.with-intermediate {
+    margin-left: 0;
+    margin-top: 2rem;
+    writing-mode: horizontal-tb;
+    font-size: 5rem;
 }
 
 
