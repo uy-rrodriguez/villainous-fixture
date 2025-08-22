@@ -53,6 +53,7 @@ resultsData = [
 
   // Syndrome
   ["Syndrome",        1,  "Lotso",            2],
+  ["Syndrome",        1,  "Mother Gothel",    2],
 
   // Madame Mim
   ["Madame Mim",      2,  "Hades",            0],
