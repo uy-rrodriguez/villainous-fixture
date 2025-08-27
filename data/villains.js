@@ -114,4 +114,12 @@ const villainsData = [
     "name": "King Candy",
     "img": "king_candy.jpg"
   },
+  {
+    "name": "Davy Jones",
+    "img": "davy_jones.jpg"
+  },
+  {
+    "name": "Tamatoa",
+    "img": "tamatoa.jpg"
+  },
 ];
