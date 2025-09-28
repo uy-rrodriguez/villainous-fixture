@@ -97,4 +97,7 @@ resultsData = [
 
   // King Candy
 
+  // Davy Jones
+  ["Davy Jones",       0,  "Tamatoa",         2],
+
 ];
