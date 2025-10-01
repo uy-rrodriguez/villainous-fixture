@@ -401,7 +401,7 @@ body {
 
 /* Show villain name to help during tests */
 .villain-name {
-    display: none;  /* Comment this out to display name */
+    color: transparent; /* Comment this out to display name */
     position: absolute;
     bottom: 0;
     right: 0;
