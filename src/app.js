@@ -40,9 +40,25 @@ class Villain {
         return `${this.name}`;
     }
     /**
+     * Generates the HTML code to print the `Villain` as part of a `Pair`.
+     *
+     * @param {boolean} isWinner Whether the `Villain` is the winner in the `Pair` being drawn.
+     * @param {boolean} isLoser WHether the `Villain` is the loser in the `Pair` being drawn.
+     * @returns HTML code.
+     */
+    toHtml(isWinner = false, isLoser = false) {
+        let _class = isWinner ? "villain-won" : isLoser ? "villain-lost" : ""
+        return `<div class="villain villain-left ${_class} col-xs-5">
+                    <div class="villain-img-wrapper">
+                        <img class="villain-img" src="assets/img/${this.image}" />
+                        <span class="villain-name">${this.name}</span>
+                    </div>
+                </div>`;
+    }
+    /**
      * Returns whether both items refer to the same villain.
      *
-     * @param {villain} other Another villain to compare.
+     * @param {Villain} other Another villain to compare.
      * @returns {boolean}
      */
     equals(other) {
@@ -82,6 +98,28 @@ class Pair {
     }
     toString() {
         return `(${this.item1}, ${this.item2})`;
+    }
+    /**
+     * Generates the HTML code to print the `Pair` in a `Fixture`.
+     *
+     * @returns HTML code.
+     */
+    toHtml() {
+        // Score is dislayed only if there is data
+        let scoresHtml = '<span class="villain-vs">vs</span>';
+        if (this.score1 || this.score2) {
+            scoresHtml =
+                `<span class="villain-score">${this.score1}</span>
+                <span class="villain-vs">-</span>
+                <span class="villain-score">${this.score2}</span>`;
+        }
+        let item1Won = this.winner === this.item1,
+            item2Won = this.winner === this.item2;
+        return `${this.item1.toHtml(item1Won, item2Won)}
+                <div class="col-xs-2 text-center villain-vs-wrapper">
+                    ${scoresHtml}
+                </div>
+                ${this.item2.toHtml(item2Won, item1Won)}`;
     }
     /**
      * Set the results for this match.
@@ -675,43 +713,8 @@ function drawFixtureHtml(fixture) {
             body.appendChild(row);
             row.classList.add("row", "row-pad-18", "vertical-align");
 
-            let resultClass1 = "";
-            let resultClass2 = "";
-            if (pair.winner === pair.item1) {
-                resultClass1 = "villain-won";
-                resultClass2 = "villain-lost";
-            }
-            else if (pair.winner === pair.item2) {
-                resultClass1 = "villain-lost";
-                resultClass2 = "villain-won";
-            }
-
-            // Score is dislayed only if there is data
-            let scoresHtml = '<span class="villain-vs">vs</span>';
-            if (pair.score1 || pair.score2) {
-                scoresHtml =
-                    `<span class="villain-score">${pair.score1}</span>
-                    <span class="villain-vs">-</span>
-                    <span class="villain-score">${pair.score2}</span>`;
-            }
-
             // Row with pairing
-            row.innerHTML =
-                `<div class="villain villain-left ${resultClass1} col-xs-5">
-                    <div class="villain-img-wrapper">
-                        <img class="villain-img" src="assets/img/${pair.item1.image}" />
-                        <span class="villain-name">${pair.item1.name}</span>
-                    </div>
-                </div>
-                <div class="col-xs-2 text-center villain-vs-wrapper">
-                    ${scoresHtml}
-                </div>
-                <div class="villain villain-right ${resultClass2} col-xs-5">
-                    <div class="villain-img-wrapper">
-                        <img class="villain-img" src="assets/img/${pair.item2.image}" />
-                        <span class="villain-name">${pair.item2.name}</span>
-                    </div>
-                </div>`;
+            row.innerHTML = pair.toHtml();
         });
     });
 
@@ -855,6 +858,41 @@ function drawStandingsHtml(fixture) {
 }
 
 /**
+ * Draws and returns a select box to quickly scroll between rounds.
+ *
+ * @param {Fixture} fixture Current fixture
+ * @returns HTMLElement of the select box.
+ */
+function drawRoundSelector(fixture) {
+    const opts = [];
+    const currentRound = fixture.current;
+    for (let i = 1; i <= fixture.rounds.length; i++) {
+        opts.push({
+            text: `Round ${i}`,
+            cls: (i < currentRound) ? "complete"
+                : (i === currentRound) ? "current"
+                : null
+        });
+    }
+
+    const rounds = document.getElementById("rounds");
+    opts.forEach((opt, i) => {
+        const option = document.createElement("option");
+        option.text = opt.text;
+        option.value = `${i+1}`;
+        if (opt.cls) {
+            option.classList.add(opt.cls);
+        }
+        rounds.add(option);
+    });
+    rounds.onchange = (evt) => {
+        scrollToRound(evt.target.value, true);
+    };
+
+    return rounds;
+}
+
+/**
  * Logic to be executed when the HTML page loads.
  *
  * @param {{ "name": string, "img": string }[]} villainsData
@@ -868,7 +906,7 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const fixture = loadFixture(villains, roundsData, resultsData);
     // B) or Generate new fixture from villains data
     // const fixture = generateFixture(villains, resultsData);
-    // C) or Updtate existing fixture with new villains data
+    // C) or Update existing fixture with new villains data
     // const oldFixture = loadFixture(villains, roundsData, []);
     // const fixture = generateFixture(villains, resultsData, oldFixture);
 
@@ -881,23 +919,8 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     // Calculate header size once
     animateHeader();
 
-    // Load rounds
-    const currentRound = fixture.current;
-    const rounds = document.getElementById("rounds");
-    for (let i = 1; i <= fixture.rounds.length; i++) {
-        const option = document.createElement("option");
-        option.text = "Round " + i;
-        option.value = `${i}`;
-        if (i < currentRound) {
-            option.classList.add("complete");
-        } else if (i === currentRound) {
-            option.classList.add("current");
-        }
-        rounds.add(option);
-    }
-    rounds.onchange = (evt) => {
-        scrollToRound(evt.target.value, true);
-    };
+    // Draw round selector
+    const rounds = drawRoundSelector(fixture);
 
     // Go to current round
     rounds.value = currentRound;
