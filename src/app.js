@@ -844,6 +844,7 @@ function drawStandingsHtml(fixture) {
     // Add button to toggle standings
     const toggleWrapper = document.createElement("div");
     toggleWrapper.id = "standings-toggle-wrapper";
+    toggleWrapper.classList.add("sidebar-toggle-wrapper");
     const toggle = document.createElement("button");
     toggleWrapper.appendChild(toggle);
     toggle.textContent = "🏆";
