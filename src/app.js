@@ -18,11 +18,18 @@
  */
 
 /**
+ * Global parameters
+ */
+const globalConfig = {
+    sortBy: "ROUNDS",  // "MATCHES",
+    isSortAsc: true,
+};
+
+/**
  * Villain with name and image.
  */
 class Villain {
     /**
-     * @param {int} id
      * @param {string} name
      * @param {string} image
      */
@@ -35,6 +42,10 @@ class Villain {
          * @type {string}
          */
         this.image = image;
+        /**
+         * @type {int}
+         */
+        this.countMatches = 0;
     }
     toString() {
         return `${this.name}`;
@@ -141,6 +152,9 @@ class Pair {
         } else if (this.score2 > this.score1) {
             this.winner = this.item2;
         }
+    }
+    getTotalMatches() {
+        return this.item1.countMatches + this.item2.countMatches;
     }
     /**
      * Creates a shallow copy of this element.
@@ -575,6 +589,8 @@ function setResultsIntoFixture(fixture, results) {
                 if (idxVillain1 >= 0 && idxVillain2 >= 0) {
                     result = resultsCopy.splice(i, 1)[0];
                     pair.setScores(result[idxVillain1 + 1], result[idxVillain2 + 1]);
+                    pair.item1.countMatches++;
+                    pair.item2.countMatches++;
                 }
                 i++;
             }
@@ -681,6 +697,39 @@ function loadFixture(villains, fixtureData, results) {
 }
 
 /**
+ * Groups pairs by total number of matches played by both villains.
+ *
+ * @param {Fixture} fixture Current `Fixture`.
+ * @returns
+ */
+function groupPairsByMatches(fixture) {
+    let pairs = [];
+
+    // Count number of played games per villain
+    fixture.rounds.forEach((round, round_idx) => {
+        round.id = round_idx + 1;
+        round.forEach((pair, pair_idx) => {
+            pair.round = round;
+            pairs.push(pair);
+        });
+    });
+
+    // Sort by the total matches played by both villains in the match
+    pairs.sort(
+        (a, b) =>
+            (globalConfig.isSortAsc ? 1 : -1)
+                * (a.getTotalMatches() - b.getTotalMatches())
+    );
+
+    let groups = pairs.reduce(function (rv, pair) {
+        (rv[pair.getTotalMatches()] ??= []).push(pair);
+        return rv;
+    }, {});
+
+    return groups;
+}
+
+/**
  * Generates HTML code to display the fixture.
  *
  * @param {Fixture} fixture
@@ -688,35 +737,73 @@ function loadFixture(villains, fixtureData, results) {
 function drawFixtureHtml(fixture) {
     const container = document.createElement("div");
 
-    fixture.rounds.forEach((round_pairs, round_idx) => {
-        const panel = document.createElement("div");
-        container.appendChild(panel);
+    if (globalConfig.sortBy === "MATCHES") {
+        const groups = groupPairsByMatches(fixture);
 
-        panel.classList.add("panel", "panel-default");
-        panel.innerHTML =
-            `<div id="round${round_idx + 1}" class="panel-heading">
-                <div class="row">
-                    <div class="col-md-9 col-sm-12 col-xs-12">
-                        <h3 class="panel-title">
-                            <strong>Round ${round_idx + 1}</strong>
-                        </h3>
+        let i = 1;
+        for (const totGames in groups) {
+            const groupPairs = groups[totGames];
+
+            const panel = document.createElement("div");
+            panel.classList.add("panel", "panel-default");
+            container.appendChild(panel);
+
+            panel.innerHTML =
+                `<div id="round${i++}" class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12 col-xs-12">
+                            <h3 class="panel-title">
+                                <strong>Games played ${totGames}</strong>
+                            </h3>
+                        </div>
                     </div>
-                </div>
-            </div>`;
+                </div>`;
 
-        const body = document.createElement("div");
-        panel.appendChild(body);
-        body.classList.add("panel-body");
+            const body = document.createElement("div");
+            body.classList.add("panel-body");
+            panel.appendChild(body);
 
-        round_pairs.forEach((pair, pair_idx) => {
-            const row = document.createElement("div");
-            body.appendChild(row);
-            row.classList.add("row", "row-pad-18", "vertical-align");
+            groupPairs.forEach((pair, pair_idx) => {
+                const row = document.createElement("div");
+                row.classList.add("row", "row-pad-18", "vertical-align");
+                body.appendChild(row);
 
-            // Row with pairing
-            row.innerHTML = pair.toHtml();
+                // Row with pairing
+                row.innerHTML = pair.toHtml();
+            });
+        }
+    }
+    else {
+        fixture.rounds.forEach((round_pairs, round_idx) => {
+            const panel = document.createElement("div");
+            container.appendChild(panel);
+
+            panel.classList.add("panel", "panel-default");
+            panel.innerHTML =
+                `<div id="round${round_idx + 1}" class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12 col-xs-12">
+                            <h3 class="panel-title">
+                                <strong>Round ${round_idx + 1}</strong>
+                            </h3>
+                        </div>
+                    </div>
+                </div>`;
+
+            const body = document.createElement("div");
+            panel.appendChild(body);
+            body.classList.add("panel-body");
+
+            round_pairs.forEach((pair, pair_idx) => {
+                const row = document.createElement("div");
+                body.appendChild(row);
+                row.classList.add("row", "row-pad-18", "vertical-align");
+
+                // Row with pairing
+                row.innerHTML = pair.toHtml();
+            });
         });
-    });
+    }
 
     document.getElementById("fixture-container").innerHTML = container.innerHTML;
 }
@@ -859,6 +946,67 @@ function drawStandingsHtml(fixture) {
 }
 
 /**
+ * Draws the inputs allowing the change of config (e.g. chose the pairs sorting
+ * order).
+ *
+ * @param {Fixture} fixture Current fixture
+ * @returns HTMLElement of the select box.
+ */
+function drawConfigSidebar(fixture) {
+    const opts = [
+        {text: "Sort by rounds", value: "ROUNDS"},
+        {text: "Sort by matches", value: "MATCHES"},
+    ];
+
+    const sortBy = document.createElement("select");
+    sortBy.id = "sort_by";
+    sortBy.name = "sort_by";
+    opts.forEach((opt) => {
+        const option = document.createElement("option");
+        option.text = opt.text;
+        option.value = opt.value;
+        sortBy.add(option);
+    });
+    sortBy.onchange = (evt) => {
+        // Reload fixture
+        globalConfig.sortBy = evt.target.value;
+        drawFixtureHtml(fixture);
+        const rounds = drawRoundSelector(fixture);
+        triggerScroll(rounds, rounds.value);
+    };
+
+    // Update global config
+    globalConfig.sortBy = sortBy.value;
+
+    // Display sidebar HTML elements
+    const configElem = document.getElementById("config-container");
+    const mainContainer = document.createElement("div");
+    mainContainer.classList.add("config");
+
+    // Title
+    const title = document.createElement("div");
+    title.classList.add("sidebar-title");
+    title.textContent = "Parameters";
+    mainContainer.appendChild(title);
+
+    // Add inputs to wrapping container
+    mainContainer.appendChild(sortBy);
+    configElem.appendChild(mainContainer);
+
+    // Add button to toggle standings
+    const toggleWrapper = document.createElement("div");
+    toggleWrapper.id = "config-toggle-wrapper";
+    toggleWrapper.classList.add("sidebar-toggle-wrapper");
+    const toggle = document.createElement("button");
+    toggleWrapper.appendChild(toggle);
+    toggle.textContent = "🔧";
+    toggle.onclick = () => {
+        toggleWrapper.classList.toggle("active");
+    };
+    configElem.parentNode.insertBefore(toggleWrapper, configElem);
+}
+
+/**
  * Draws and returns a select box to quickly scroll between rounds.
  *
  * @param {Fixture} fixture Current fixture
@@ -866,17 +1014,29 @@ function drawStandingsHtml(fixture) {
  */
 function drawRoundSelector(fixture) {
     const opts = [];
-    const currentRound = fixture.current;
-    for (let i = 1; i <= fixture.rounds.length; i++) {
-        opts.push({
-            text: `Round ${i}`,
-            cls: (i < currentRound) ? "complete"
-                : (i === currentRound) ? "current"
-                : null
-        });
+
+    if (globalConfig.sortBy === "MATCHES") {
+        const groups = groupPairsByMatches(fixture);
+        for (const totGames in groups) {
+            opts.push({
+                text: `Games ${totGames}`
+            });
+        }
+    }
+    else {
+        const currentRound = fixture.current;
+        for (let i = 1; i <= fixture.rounds.length; i++) {
+            opts.push({
+                text: `Round ${i}`,
+                cls: (i < currentRound) ? "complete"
+                    : (i === currentRound) ? "current"
+                    : null
+            });
+        }
     }
 
     const rounds = document.getElementById("rounds");
+    const select = document.createElement("select");
     opts.forEach((opt, i) => {
         const option = document.createElement("option");
         option.text = opt.text;
@@ -884,13 +1044,19 @@ function drawRoundSelector(fixture) {
         if (opt.cls) {
             option.classList.add(opt.cls);
         }
-        rounds.add(option);
+        select.add(option);
     });
     rounds.onchange = (evt) => {
         scrollToRound(evt.target.value, true);
     };
+    rounds.innerHTML = select.innerHTML;
 
     return rounds;
+}
+
+function triggerScroll(roundsSelect, roundValue) {
+    roundsSelect.value = roundValue;
+    roundsSelect.dispatchEvent(new Event("change"));
 }
 
 /**
@@ -916,6 +1082,7 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     // Draw fixture as HTML
     drawFixtureHtml(fixture);
     drawStandingsHtml(fixture);
+    drawConfigSidebar(fixture);
 
     // Calculate header size once
     animateHeader();
@@ -924,6 +1091,7 @@ function onPageLoad(villainsData, roundsData, resultsData) {
     const rounds = drawRoundSelector(fixture);
 
     // Go to current round
-    rounds.value = currentRound;
-    rounds.dispatchEvent(new Event("change"));
+    if (globalConfig.sortBy === "ROUNDS") {
+        triggerScroll(rounds, fixture.current);
+    }
 }

@@ -127,6 +127,10 @@ body {
     left: 1rem;
 }
 
+#config-toggle-wrapper {
+    right: 1rem;
+}
+
 .sidebar-toggle-wrapper > button {
     background: transparent;
     margin: 0;
@@ -141,6 +145,10 @@ body {
     margin-left: -1px;
 }
 
+#config-toggle-wrapper > button {
+    margin-right: -1px;
+}
+
 .sidebar-toggle-wrapper > button:hover {
     filter: grayscale(0);
     transform: scale(1.1);
@@ -148,6 +156,10 @@ body {
 
 #standings-toggle-wrapper.active {
     margin-left: 57px;
+}
+
+#config-toggle-wrapper.active {
+    margin-right: 40px;
 }
 
 .sidebar-toggle-wrapper.active > button {
@@ -162,6 +174,10 @@ body {
 
 #standings-toggle-wrapper.active + #standings-container {
     left: 0;
+}
+
+#config-toggle-wrapper.active + #config-container {
+    right: 0;
 }
 
 .sidebar-container {
@@ -183,6 +199,13 @@ body {
     left: -160px;
     border-right-width: 3px;
     border-bottom-right-radius: 16px;
+}
+
+#config-container {
+    right: -160px;
+    border-left-width: 3px;
+    border-bottom-left-radius: 16px;
+    padding: 0 1rem;
 }
 
 .header.shrink ~ .sidebar-container {
