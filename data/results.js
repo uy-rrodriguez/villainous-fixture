@@ -96,6 +96,7 @@ resultsData = [
   // Shere Khan
 
   // King Candy
+  ["King Candy",      2,  "Shere Khan",       1],
 
   // Davy Jones
   ["Davy Jones",       0,  "Tamatoa",         2],
