@@ -97,6 +97,7 @@ resultsData = [
 
   // King Candy
   ["King Candy",      2,  "Shere Khan",       1],
+  ["King Candy",      0,  "Tamatoa",          2],
 
   // Davy Jones
   ["Davy Jones",       0,  "Tamatoa",         2],
