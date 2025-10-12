@@ -138,7 +138,7 @@ body {
     font-size: 3rem;
     border: none;
     filter: grayscale(1);
-    transition: filter,transform .2s ease;  /*, box-shadow .5s ease;*/
+    transition: margin .1s ease, transform .2s ease;  /*, box-shadow .5s ease;*/
 }
 
 #standings-toggle-wrapper > button {
@@ -154,12 +154,12 @@ body {
     transform: scale(1.1);
 }
 
-#standings-toggle-wrapper.active {
-    margin-left: 57px;
+#standings-toggle-wrapper.active > button {
+    margin-left: 56px;
 }
 
 #config-toggle-wrapper.active {
-    margin-right: 40px;
+    margin-right: 56px;
 }
 
 .sidebar-toggle-wrapper.active > button {
@@ -192,7 +192,7 @@ body {
     scrollbar-width: thin;
     scroll-behavior: smooth;
 
-    transition: left .2s ease, top .3s ease;
+    transition: left .2s ease, right .2s ease, top .3s ease;
 }
 
 #standings-container {
@@ -202,10 +202,10 @@ body {
 }
 
 #config-container {
-    right: -160px;
+    right: calc(-160px - 1rem);
+    padding: 0 1rem;
     border-left-width: 3px;
     border-bottom-left-radius: 16px;
-    padding: 0 1rem;
 }
 
 .header.shrink ~ .sidebar-container {
