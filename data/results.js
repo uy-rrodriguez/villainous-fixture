@@ -101,5 +101,6 @@ resultsData = [
 
   // Davy Jones
   ["Davy Jones",       0,  "Tamatoa",         2],
+  ["Davy Jones",       1,  "Shere Khan",      2],
 
 ];
