@@ -88,6 +88,7 @@ resultsData = [
 
   // Cruella
   ["Cruella",         1,  "Scar",             2],
+  ["Cruella",         0,  "Horned King",      2],
 
   // Oogie Boogie
   ["Oogie Boogie",    2,  "Lotso",            1],
