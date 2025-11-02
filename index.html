@@ -35,7 +35,7 @@
         <link href="./assets/css/villains.css?v={{ site.github.build_revision }}" rel="stylesheet" />
     </head>
     <body>
-        <div class="top">
+        <div class="top grow">
             <div id="header" class="container header">
                 <span class="disney">Disney Villainous</span> - The Ultimate Battle for <span class="evil">Evil</span>
             </div>
@@ -62,7 +62,11 @@
     <script src="data/rounds.js?v={{ site.github.build_revision }}"></script>
     <script src="data/results.js?v={{ site.github.build_revision }}"></script>
     <script>
-        window.onscroll = animateHeader;
+        window.onscroll = () => {
+            animateHeader();
+            stickyPanelHeading();
+        };
+
         window.onload = () => {
             // Load fixture
             // Villains, Rounds and Results data are loaded from imported JS files
