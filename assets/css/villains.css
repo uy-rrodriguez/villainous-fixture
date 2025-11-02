@@ -189,7 +189,7 @@ body {
   display: none;
   position: fixed;
   top: 0;
-  bottom: 0;
+  bottom: -100vh;
   left: 0;
   right: 0;
   background: #111111;
