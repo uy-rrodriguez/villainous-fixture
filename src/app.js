@@ -937,6 +937,7 @@ function drawStandingsHtml(fixture) {
     toggle.textContent = "🏆";
     toggle.onclick = () => {
         toggleWrapper.classList.toggle("active");
+        document.body.classList.toggle("with-sidebar-standings");
     };
     standingsElem.parentNode.insertBefore(toggleWrapper, standingsElem);
 
@@ -993,7 +994,7 @@ function drawConfigSidebar(fixture) {
     mainContainer.appendChild(sortBy);
     configElem.appendChild(mainContainer);
 
-    // Add button to toggle standings
+    // Add button to toggle config
     const toggleWrapper = document.createElement("div");
     toggleWrapper.id = "config-toggle-wrapper";
     toggleWrapper.classList.add("sidebar-toggle-wrapper");
@@ -1002,6 +1003,7 @@ function drawConfigSidebar(fixture) {
     toggle.textContent = "🔧";
     toggle.onclick = () => {
         toggleWrapper.classList.toggle("active");
+        document.body.classList.toggle("with-sidebar-config");
     };
     configElem.parentNode.insertBefore(toggleWrapper, configElem);
 }

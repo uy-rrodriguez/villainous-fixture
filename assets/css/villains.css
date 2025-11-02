@@ -32,24 +32,24 @@ body {
     color: white;
     background-color: var(--bg-color);
 }
-
-/*
- * HEADER
- */
 .container, .top {
     min-width: 500px;
 }
 
+
+/*
+ * HEADER
+ */
 .top {
     top: 0;
     width: 100%;
     background-color: #5b52a1;
     border-bottom: 3px solid var(--top-border-color);
     position: fixed;
-    z-index: 3;
+    z-index: 4;
 }
 
-.top ~ * {
+.top ~ .container {
     margin-top: 10rem;
 }
 
@@ -60,17 +60,13 @@ body {
     line-height: 3rem;
     text-align: center;
     color: white;
+    transition: all .3s ease;
 }
 
 .top.shrink > .header {
     padding: 0.8rem;
     line-height: 2.2rem;
     transform: scale(0.7);
-    transition: all .3s ease;
-}
-
-.top.grow > .header {
-    transition: all .3s ease;
 }
 
 .disney {
@@ -108,8 +104,18 @@ body {
 
 .rounds-wrapper {
     position: fixed;
-    right: 0px;
+    right: 0;
+    top: 0;
     z-index: 3;
+    transition: margin-top .3s ease;
+}
+
+.top.shrink ~ .rounds-wrapper {
+    margin-top: 49.5px;
+}
+
+.top.grow ~ .rounds-wrapper {
+    margin-top: 91.5px;
 }
 
 .rounds {
@@ -179,12 +185,39 @@ body {
     transform: scale(1.1);
 }
 
-#standings-toggle-wrapper.active > button {
-    margin-left: 56px;
+#cloud {  /* To hide content when sidebar is active */
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111111;
+  opacity: .7;
+  z-index: 3;
 }
 
-#config-toggle-wrapper.active {
-    margin-right: 56px;
+.with-sidebar-standings #cloud,
+.with-sidebar-config #cloud {
+    display: block;
+}
+
+#standings-toggle-wrapper.active > button {
+    margin-left: 1rem;
+}
+
+#config-toggle-wrapper.active > button {
+    margin-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    #standings-toggle-wrapper.active > button {
+        margin-left: 6.7rem;
+    }
+
+    #config-toggle-wrapper.active > button {
+        margin-right: 6rem;
+    }
 }
 
 .sidebar-toggle-wrapper.active > button {
@@ -215,8 +248,8 @@ body {
     position: fixed;
     top: 88px;
     bottom: 0;
-    z-index: 3;
 
+    padding: 1.5rem;
     background-color: #5b52a1;
     border: 3px solid var(--top-border-color);
     border-width: 0 0 3px 0;
@@ -228,14 +261,13 @@ body {
 }
 
 #standings-container {
-    left: -160px;
+    left: -24rem;
     border-right-width: 3px;
     border-bottom-right-radius: 16px;
 }
 
 #config-container {
-    right: calc(-160px - 1rem);
-    padding: 0 1rem;
+    right: -18rem;
     border-left-width: 3px;
     border-bottom-left-radius: 16px;
 }
@@ -253,8 +285,10 @@ body {
 
 .sidebar-title {
     margin-bottom: 1.5rem;
-    font-size: 1.8rem;
+    font-size: 2rem;
     line-height: 1;
+    font-weight: bold;
+    text-align: center;
 }
 
 
@@ -266,8 +300,7 @@ body {
     flex-direction: column;
     align-items: center;
 
-    padding-left: 3rem;
-    padding-right: 1.5rem;
+    padding-left: 1.5rem;
 }
 
 .standings .intermediate {
@@ -305,8 +338,8 @@ body {
     display: grid;
     grid-auto-flow: column;
     justify-content: space-around;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -323,9 +356,10 @@ body {
 }
 
 .standings-item .villain-img,
-.standings-item .villain-lost .villain-img {
-    width: 10rem;
-    height: 10rem;
+.standings-item .villain-lost .villain-img,
+.standings-item .villain.villain-lost:before {
+    width: 18rem;
+    height: 18rem;
 }
 
 /* .standings-item.standings-first .villain-img {
@@ -339,8 +373,6 @@ body {
 } */
 
 .standings-item .villain.villain-lost:before {
-    width: 10rem;
-    height: 10rem;
     margin: 5px;  /* To adjust position because of the img border */
 }
 
@@ -364,6 +396,20 @@ body {
     margin-top: 2rem;
     writing-mode: horizontal-tb;
     font-size: 5rem;
+}
+
+@media (min-width: 768px) {
+    .standings-item .results {
+        margin-bottom: 2.2rem;
+        font-size: 1.5rem;
+    }
+
+    .standings-item .villain-img,
+    .standings-item .villain-lost .villain-img,
+    .standings-item .villain.villain-lost:before {
+        width: 12rem;
+        height: 12rem;
+    }
 }
 
 
